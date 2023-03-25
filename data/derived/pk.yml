@@ -1,0 +1,35 @@
+SETUP__:
+  lookup_file: [lookup.yml]
+  description: ABC123 Population Pharmacokinetic (PK) Model Data Specification
+  projectnumber: ABC123  
+  sponsor: ABC Company
+  data_stem: pk
+  flags:
+    bl_cat_cov: [STUDY, SEX] # Baseline categorical covariate
+    # tv_cat_cov: [] # Time-varying categorical covariate
+    bl_cont_cov: [AGE, WT, EGFR, BILI] # Baseline continuous covariate
+    # tv_cont_cov: [] # Time-varying continuous covariate
+C:
+NUM:
+ID:
+TIME:
+CMT:
+EVID:
+MDV:
+DV:
+AMT:
+RATE:
+DOSE:
+LDOS:
+SEX:
+AGE:
+WT:
+EGFR:
+BILI:
+BLQ:
+DAY:
+TAD:
+ADDL:
+II:
+NMTIME:
+STUDY:

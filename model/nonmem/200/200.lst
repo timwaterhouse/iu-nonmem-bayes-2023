@@ -1,0 +1,389 @@
+Wed Mar 22 21:54:08 EDT 2023
+$PROBLEM From bbr: see 200.yaml for details
+
+$INPUT C NUM ID TIME CMT EVID MDV DV AMT RATE DOSE LDOS SEX AGE WT EGFR BILI BLQ DAY TAD ADDL II NMTIME STUDY
+
+
+$DATA ../../../data/derived/study-001-002-003.csv
+  IGNORE=@ 
+  IGNORE=(BLQ.EQ.1)
+  IGNORE=(TIME.LT.0)
+
+$SUBROUTINE ADVAN4 TRANS4
+
+$PK
+
+; cap EGFR at 120
+  GFRC = EGFR
+  IF(EGFR.GT.120) GFRC = 120
+
+  ; Patient vs healthy
+  PAT=0
+  IF(STUDY.EQ.3) PAT=1
+  ; male vs female
+  ISEX=0
+  IF(SEX.EQ.2) ISEX=1
+
+  WTCL = LOG(WT/70)*THETA(7)
+  WTV = LOG(WT/70)*THETA(8)
+  AGECL = LOG(AGE/40)*THETA(9)
+  EGFRCL = LOG(GFRC/120)*THETA(10)
+  PATCL = THETA(11)*PAT
+  SEXCL = THETA(12)*ISEX
+
+  MU_1 = THETA(1) + WTCL + AGECL + EGFRCL + PATCL + SEXCL
+  CL = EXP(MU_1 + ETA(1))
+
+  MU_2 = THETA(2) + WTV
+  V2 = EXP(MU_2 + ETA(2))
+
+  MU_3 = THETA(3)
+  KA = EXP(MU_3 + ETA(3))
+
+  MU_4 = THETA(4)
+  D1 = EXP(MU_4 + ETA(4))
+
+  MU_5 = THETA(5) + WTCL
+  Q = EXP(MU_5 + ETA(5))
+
+  MU_6 = THETA(6) + WTV
+  V3 = EXP(MU_6 + ETA(6))
+
+  S2 = V2
+
+$ERROR
+  IPRED = F
+  Y = IPRED*(1 + EPS(1)) + EPS(2)
+
+$THETA 
+  2        ; CL
+  5        ; V2
+  0.5      ; KA
+  0.1      ; D1
+  -1       ; Q
+  4        ; V3
+
+  0.75     ; WTCL
+  1.00     ; WTV
+  0.01     ; AGECL
+  0.01     ; EGFRCL
+  0.01     ; PATCL
+  0.01     ; SEXCL
+
+$OMEGA BLOCK(2)
+  0.1      ; CL
+  0.05 0.1 ; V2
+$OMEGA
+  0.1      ; KA
+  0 FIX    ; D1
+  0 FIX    ; Q
+  0 FIX    ; V3
+
+$SIGMA
+  0.1      ; PROP
+  10       ; ADD
+
+$PRIOR NWPRI
+
+$THETAP 
+  2   FIX     ; CL
+  5   FIX     ; V2
+  0.5 FIX     ; KA
+  0.1 FIX     ; D1
+  -1  FIX     ; Q
+  4   FIX     ; V3
+
+  0.75 FIX  ; WTCL
+  1.00 FIX  ; WTV
+  0.01 FIX  ; AGECL
+  0.01 FIX  ; EGFRCL
+  0.01 FIX  ; PATCL
+  0.01 FIX  ; SEXCL
+
+$THETAPV BLOCK(12) VALUES(4, 0) FIX
+
+$OMEGAP BLOCK(2) FIX
+  0.1      ; CL
+  0.05 0.1 ; V2
+$OMEGAP
+  0.1 FIX  ; KA
+  0 FIX    ; D1
+  0 FIX    ; Q
+  0 FIX    ; V3
+
+$OMEGAPD (3 FIX) (1 FIX) (1 FIX) (1 FIX) (1 FIX)
+
+$SIGMAP
+  0.1 FIX     ; PROP
+  10  FIX     ; ADD
+
+$SIGMAPD (1 FIX) (1 FIX)
+
+; CHAIN options:
+;   CTYPE=0: initial estimates for THETA are sampled from a uniform
+;     distribution between (1-IACCEPT)*THETA and (1+IACCEPT)*THETA)
+;   CTYPE=2: initial estimates for THETA are from a normal distribution with
+;     mean from the initial estimate in $THETA and variance from $THETAPV
+;   DF=0: initial estimates for OMEGA come from Wishart distribution using
+;     values in $OMEGA and degrees of freedom equal to dimensions of OMEGA
+;   DFS=0: initial estimates for SIGMA come from Wishart distribution using
+;     values in $SIGMA and degrees of freedom equal to dimensions of SIGMA
+$EST METHOD=CHAIN FILE=200.chn NSAMPLE=4 ISAMPLE=0 SEED=1 CTYPE=0 IACCEPT=0.3 DF=10 DFS=3
+;$EST METHOD=NUTS AUTO=2 SEED=1 NBURN=500 NITER=1000 PRINT=1 MSFO=./200.msf RANMETHOD=P PARAFPRINT=10000 BAYES_PHI_STORE=1
+
+;$TABLE NUM KA D1 CL V2 Q V3 ETAS(1:LAST) EPRED IPRED NPDE EWRES NOPRINT ONEHEADER FILE=200.tab RANMETHOD=P
+
+
+NM-TRAN MESSAGES
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+
+ (MU_WARNING 6) THETA(007): SHOULD BE ASSOCIATED WITH ONLY ONE MU_.
+
+ (MU_WARNING 6) THETA(008): SHOULD BE ASSOCIATED WITH ONLY ONE MU_.
+
+ (MU_WARNING 26) DATA ITEM(S) USED IN DEFINITION OF MU_(S) SHOULD BE CONSTANT FOR INDIV. REC.:
+  WT AGE EGFR
+
+ LIM VALUES MAXLIM ASSESSED BY NMTRAN: 1,2,3,4,5,6,7,8,10,11,13,15,16        
+
+License Registered to: Metrum Research Group (with RADAR5NM)
+Expiration Date:    14 JUL 2023
+Current Date:       22 MAR 2023
+Days until program expires : 112
+1NONLINEAR MIXED EFFECTS MODEL PROGRAM (NONMEM) VERSION 7.5.0
+ ORIGINALLY DEVELOPED BY STUART BEAL, LEWIS SHEINER, AND ALISON BOECKMANN
+ CURRENT DEVELOPERS ARE ROBERT BAUER, ICON DEVELOPMENT SOLUTIONS,
+ AND ALISON BOECKMANN. IMPLEMENTATION, EFFICIENCY, AND STANDARDIZATION
+ PERFORMED BY NOUS INFOSYSTEMS.
+
+ PROBLEM NO.:         1
+ From bbr: see 200.yaml for details
+0DATA CHECKOUT RUN:              NO
+ DATA SET LOCATED ON UNIT NO.:    2
+ THIS UNIT TO BE REWOUND:        NO
+ NO. OF DATA RECS IN DATA SET:     3428
+ NO. OF DATA ITEMS IN DATA SET:  24
+ ID DATA ITEM IS DATA ITEM NO.:   3
+ DEP VARIABLE IS DATA ITEM NO.:   8
+ MDV DATA ITEM IS DATA ITEM NO.:  7
+0INDICES PASSED TO SUBROUTINE PRED:
+   6   4   9  10   0  22   5   0   0   0  21
+0LABELS FOR DATA ITEMS:
+ C NUM ID TIME CMT EVID MDV DV AMT RATE DOSE LDOS SEX AGE WT EGFR BILI BLQ DAY TAD ADDL II NMTIME STUDY
+0FORMAT FOR DATA:
+ (6(4E19.0/))
+
+ TOT. NO. OF OBS RECS:     2572
+ TOT. NO. OF INDIVIDUALS:      208
+0LENGTH OF THETA:  31
+0DEFAULT THETA BOUNDARY TEST OMITTED:    NO
+0OMEGA HAS BLOCK FORM:
+  1
+  1  1
+  0  0  2
+  0  0  0  3
+  0  0  0  0  4
+  0  0  0  0  0  5
+  0  0  0  0  0  0  6
+  0  0  0  0  0  0  6  6
+  0  0  0  0  0  0  6  6  6
+  0  0  0  0  0  0  6  6  6  6
+  0  0  0  0  0  0  6  6  6  6  6
+  0  0  0  0  0  0  6  6  6  6  6  6
+  0  0  0  0  0  0  6  6  6  6  6  6  6
+  0  0  0  0  0  0  6  6  6  6  6  6  6  6
+  0  0  0  0  0  0  6  6  6  6  6  6  6  6  6
+  0  0  0  0  0  0  6  6  6  6  6  6  6  6  6  6
+  0  0  0  0  0  0  6  6  6  6  6  6  6  6  6  6  6
+  0  0  0  0  0  0  6  6  6  6  6  6  6  6  6  6  6  6
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  7
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  7  7
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  8
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  9
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 10
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 11
+0DEFAULT OMEGA BOUNDARY TEST OMITTED:    NO
+0SIGMA HAS BLOCK FORM:
+  1
+  0  2
+  0  0  3
+  0  0  0  4
+0DEFAULT SIGMA BOUNDARY TEST OMITTED:    NO
+0INITIAL ESTIMATE OF THETA:
+ LOWER BOUND    INITIAL EST    UPPER BOUND
+ -0.1000E+07     0.2000E+01     0.1000E+07
+ -0.1000E+07     0.5000E+01     0.1000E+07
+ -0.1000E+07     0.5000E+00     0.1000E+07
+ -0.1000E+07     0.1000E+00     0.1000E+07
+ -0.1000E+07    -0.1000E+01     0.1000E+07
+ -0.1000E+07     0.4000E+01     0.1000E+07
+ -0.1000E+07     0.7500E+00     0.1000E+07
+ -0.1000E+07     0.1000E+01     0.1000E+07
+ -0.1000E+07     0.1000E-01     0.1000E+07
+ -0.1000E+07     0.1000E-01     0.1000E+07
+ -0.1000E+07     0.1000E-01     0.1000E+07
+ -0.1000E+07     0.1000E-01     0.1000E+07
+  0.2000E+01     0.2000E+01     0.2000E+01
+  0.5000E+01     0.5000E+01     0.5000E+01
+  0.5000E+00     0.5000E+00     0.5000E+00
+  0.1000E+00     0.1000E+00     0.1000E+00
+ -0.1000E+01    -0.1000E+01    -0.1000E+01
+  0.4000E+01     0.4000E+01     0.4000E+01
+  0.7500E+00     0.7500E+00     0.7500E+00
+  0.1000E+01     0.1000E+01     0.1000E+01
+  0.1000E-01     0.1000E-01     0.1000E-01
+  0.1000E-01     0.1000E-01     0.1000E-01
+  0.1000E-01     0.1000E-01     0.1000E-01
+  0.1000E-01     0.1000E-01     0.1000E-01
+  0.3000E+01     0.3000E+01     0.3000E+01
+  0.1000E+01     0.1000E+01     0.1000E+01
+  0.1000E+01     0.1000E+01     0.1000E+01
+  0.1000E+01     0.1000E+01     0.1000E+01
+  0.1000E+01     0.1000E+01     0.1000E+01
+  0.1000E+01     0.1000E+01     0.1000E+01
+  0.1000E+01     0.1000E+01     0.1000E+01
+0INITIAL ESTIMATE OF OMEGA:
+ BLOCK SET NO.   BLOCK                                                                    FIXED
+        1                                                                                   NO
+                  0.1000E+00
+                  0.5000E-01   0.1000E+00
+        2                                                                                   NO
+                  0.1000E+00
+        3                                                                                  YES
+                  0.0000E+00
+        4                                                                                  YES
+                  0.0000E+00
+        5                                                                                  YES
+                  0.0000E+00
+        6                                                                                  YES
+ DIMENSION OF BLOCK EXCEEDS 8
+ INITL. EST. OF BLOCK NOT PRINTED
+        7                                                                                  YES
+                  0.1000E+00
+                  0.5000E-01   0.1000E+00
+        8                                                                                  YES
+                  0.1000E+00
+        9                                                                                  YES
+                  0.0000E+00
+       10                                                                                  YES
+                  0.0000E+00
+       11                                                                                  YES
+                  0.0000E+00
+0INITIAL ESTIMATE OF SIGMA:
+ BLOCK SET NO.   BLOCK                                                                    FIXED
+        1                                                                                   NO
+                  0.1000E+00
+        2                                                                                   NO
+                  0.1000E+02
+        3                                                                                  YES
+                  0.1000E+00
+        4                                                                                  YES
+                  0.1000E+02
+0
+ PRIOR SUBROUTINE USER-SUPPLIED
+1DOUBLE PRECISION PREDPP VERSION 7.5.0
+
+ TWO COMPARTMENT MODEL WITH FIRST-ORDER ABSORPTION (ADVAN4)
+0MAXIMUM NO. OF BASIC PK PARAMETERS:   5
+0BASIC PK PARAMETERS (AFTER TRANSLATION):
+   BASIC PK PARAMETER NO.  1: ELIMINATION RATE (K)
+   BASIC PK PARAMETER NO.  2: CENTRAL-TO-PERIPH. RATE (K23)
+   BASIC PK PARAMETER NO.  3: PERIPH.-TO-CENTRAL RATE (K32)
+   BASIC PK PARAMETER NO.  5: ABSORPTION RATE (KA)
+ TRANSLATOR WILL CONVERT PARAMETERS
+ CL, V2, Q, V3 TO K, K23, K32 (TRANS4)
+0COMPARTMENT ATTRIBUTES
+ COMPT. NO.   FUNCTION   INITIAL    ON/OFF      DOSE      DEFAULT    DEFAULT
+                         STATUS     ALLOWED    ALLOWED    FOR DOSE   FOR OBS.
+    1         DEPOT        OFF        YES        YES        YES        NO
+    2         CENTRAL      ON         NO         YES        NO         YES
+    3         PERIPH.      ON         NO         YES        NO         NO
+    4         OUTPUT       OFF        YES        NO         NO         NO
+1
+ ADDITIONAL PK PARAMETERS - ASSIGNMENT OF ROWS IN GG
+ COMPT. NO.                             INDICES
+              SCALE      BIOAVAIL.   ZERO-ORDER  ZERO-ORDER  ABSORB
+                         FRACTION    RATE        DURATION    LAG
+    1            *           *           *           6           *
+    2            7           *           *           *           *
+    3            *           *           *           *           *
+    4            *           -           -           -           -
+             - PARAMETER IS NOT ALLOWED FOR THIS MODEL
+             * PARAMETER IS NOT SUPPLIED BY PK SUBROUTINE;
+               WILL DEFAULT TO ONE IF APPLICABLE
+0DATA ITEM INDICES USED BY PRED ARE:
+   EVENT ID DATA ITEM IS DATA ITEM NO.:      6
+   TIME DATA ITEM IS DATA ITEM NO.:          4
+   DOSE AMOUNT DATA ITEM IS DATA ITEM NO.:   9
+   DOSE RATE DATA ITEM IS DATA ITEM NO.:    10
+   INTERVAL DATA ITEM IS DATA ITEM NO.:     22
+   ADDL. DOSES DATA ITEM IS DATA ITEM NO.:  21
+   COMPT. NO. DATA ITEM IS DATA ITEM NO.:    5
+
+0PK SUBROUTINE CALLED WITH EVERY EVENT RECORD.
+ PK SUBROUTINE NOT CALLED AT NONEVENT (ADDITIONAL OR LAGGED) DOSE TIMES.
+0ERROR SUBROUTINE CALLED WITH EVERY EVENT RECORD.
+1
+
+
+ #TBLN:      1
+ #METH: Chain Method Processing
+
+ RANDOM GENERATION TYPE (CTYPE):     0
+ RANDOM GENERATION SEED (SEED):      1
+ RANDOM SAMPLE SELECTION (ISAMPLE):  0
+ RANDOM SAMPLE RANGE END (ISAMPEND): -2147483647
+ NUMBER OF RANDOM SAMPLES (NSAMPLE): 4
+ UNIFORM FRACTIONAL RANGE (IACCEPT): 0.300000000000000
+ RANDOM SELECTION TYPE (SELECT):     0
+ DEG. FR. TO GENERATE OMEGAS (DF):   10
+ DEG. FR. TO GENERATE SIGMAS (DFS):  3
+ CHAIN FILE (FILE):                  200.chn
+ EXCL. TITLE IN CHAIN FILE (NOTITLE):NO
+ EX. COL. LBS. IN CHAIN FL.(NOLABEL):NO
+ FORMAT FOR CHAIN FILE (FORMAT):     S1PE12.5
+ PAR. ORDER in CHAIN FILE (ORDER):   TSOL
+ RANDOM SAMPLING METHOD (RANMETHOD):3U
+
+ THE FOLLOWING LABELS ARE EQUIVALENT
+ PRED=NPRED
+ RES=NRES
+ WRES=NWRES
+ IWRS=NIWRES
+ IPRD=NIPRED
+ IRS=NIRES
+
+
+
+ FROM SAMPLE 0 OF CHAIN FILE 200.chn
+ NEW INITIAL ESTIMATES OF THETA
+  0.2000E+01
+  0.5000E+01
+  0.5000E+00
+  0.1000E+00
+ -0.1000E+01
+  0.4000E+01
+  0.7500E+00
+  0.1000E+01
+  0.1000E-01
+  0.1000E-01
+  0.1000E-01
+  0.1000E-01
+ NEW INITIAL ESTIMATES OF OMEGA
+  0.1000E+00
+  0.5000E-01  0.1000E+00
+  0.0000E+00  0.0000E+00  0.1000E+00
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00  0.0000E+00
+ NEW INITIAL ESTIMATES OF SIGMA
+  0.1000E+00
+  0.0000E+00  0.1000E+02
+ Elapsed postprocess time in seconds:     0.00
+ Elapsed finaloutput time in seconds:     0.01
+ #CPUT: Total CPU Time in Seconds,        0.737
+Stop Time:
+Wed Mar 22 21:54:14 EDT 2023

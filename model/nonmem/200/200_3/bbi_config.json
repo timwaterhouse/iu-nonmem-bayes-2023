@@ -1,0 +1,52 @@
+{
+    "bbi_version": "v3.2.2",
+    "model_name": "200_3.ctl",
+    "original_model": "200_3.ctl",
+    "model_path": "/data/iu-nonmem-bayes-2023/model/nonmem/200/200_3/200_3.ctl",
+    "data_path": "../../../../data/derived/study-001-002-003.csv",
+    "data_md5": "1c25e1db469facc9b8b52f00012a9bf9",
+    "model_md5": "35f349ed575482275b4d4a84709cf476",
+    "model_filename": "200_3",
+    "model_extension": "ctl",
+    "original_path": "/data/iu-nonmem-bayes-2023/model/nonmem/200/200_3",
+    "output_dir": "/data/iu-nonmem-bayes-2023/model/nonmem/200/200_3",
+    "configuration": {
+        "clean_lvl": 1,
+        "git": true,
+        "output_dir": "{{ .Name }}",
+        "threads": 4,
+        "local": {},
+        "nonmem": {
+            "nm73gf": {
+                "home": "/opt/NONMEM/nm73gf",
+                "executable": "nmfe73",
+                "nmqual": true
+            },
+            "nm73gf_nmfe": {
+                "home": "/opt/NONMEM/nm73gf_nmfe",
+                "executable": "nmfe73"
+            },
+            "nm74gf": {
+                "home": "/opt/NONMEM/nm74gf",
+                "executable": "nmfe74",
+                "nmqual": true
+            },
+            "nm74gf_nmfe": {
+                "home": "/opt/NONMEM/nm74gf_nmfe",
+                "executable": "nmfe74"
+            },
+            "nm75": {
+                "home": "/opt/NONMEM/nm75",
+                "executable": "nmfe75",
+                "default": true
+            }
+        },
+        "parallel": true,
+        "nmfe_options": {
+            "maxlim": 2
+        },
+        "mpi_exec_path": "/usr/local/mpich3/bin/mpiexec",
+        "parallel_timeout": 2147483647
+    },
+    "error": null
+}
