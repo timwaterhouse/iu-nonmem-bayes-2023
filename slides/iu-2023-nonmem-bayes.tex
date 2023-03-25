@@ -131,6 +131,23 @@ Metrum Research Group}
 
 \end{frame}
 
+\section{Acknowledgments}
+
+\begin{frame}{Acknowledgments}
+
+  These slides borrow heavily from the following:
+
+  \begin{itemize}
+    \item \href{https://metrumrg.com/course/introduction-to-bayesian-pharmacometric-data-analysis-with-nonmem/}{Introduction to Bayesian pharmacometric data analysis with NONMEM} (ACoP 2019 workshop by Bill Gillespie and Curtis Johnston)
+    \item ``Tutorial: Bayesian Estimation in NONMEM'' by Curtis K. Johnston,
+    Matthew Wiens,
+    John Mondick,
+    Jonathan French,
+    Bill Gillespie (and myself)
+     (manuscript submitted for publication)
+  \end{itemize}
+\end{frame}
+
 \section{Lecture Outline}
 
 % \begin{frame}
@@ -162,75 +179,10 @@ Metrum Research Group}
   \begin{itemize}
 \item Why Bayesian?
   \item Introduction to Bayesian statistical principles and methods
-    \begin{itemize}
-    \item Bayes Rule
-    \item Bayesian modeling \& inference process
-    \end{itemize}
   \item Computation for Bayesian modeling
-    \begin{itemize}
-    \item Maximum a Posteriori (MAP) Bayes
-      \begin{itemize}
-      \item Individual: NONMEM POSTHOC
-      \item Population: Penalized Maximum Likelihood
-      \end{itemize}
-    \item Full Bayesian analysis
-      \begin{itemize}
-      \item General computational approach: posterior simulation
-      \item Brief intro to Markov chain Monte Carlo (MCMC) simulation \\
-        \hspace{1em} $\cdot$ Gibbs sampling \\
-        \hspace{1em} $\cdot$ Metropolis-Hastings \\
-        \hspace{1em} $\cdot$ Hamiltonian Monte Carlo and NUTS
-      \end{itemize}
-    \end{itemize}
-  \end{itemize}
-%  \textcolor{mrgteal}{Break: 10:30--10:45am}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Introduction to Bayesian pharmacometric data analysis
-    using NONMEM$^\text{\textregistered}$}
-
-  \vspace{-10pt}
-%  \textcolor{mrgteal}{Day 1 (cont.)}
-  \begin{itemize}
   \item Overview of NONMEM$^\text{\textregistered}$ implementations
-    \begin{itemize}
-    \item MAP estimation
-      \begin{itemize}
-      \item Using prior distributions with optimization methods
-      \end{itemize}
-    \item MCMC: BAYES and NUTS methods
-    \item Prior specification in NONMEM$^\text{\textregistered}$
-    \end{itemize}
-  \end{itemize}
-%  \textcolor{mrgteal}{Lunch: 12:00--1:00pm}
-  \begin{itemize}
-  % \item Example 1: Example illustrating Bayesian data analysis
-  %   workflow
   \item Prior distributions
-    \begin{itemize}
-    \item Role of a prior distribution
-    \item Informative, uninformative or weakly informative?
-    %\item More on NONMEM$^\text{\textregistered}$ prior specification
-    \end{itemize}
-  \end{itemize}
-%  \textcolor{mrgteal}{Break: 3:00--3:15pm}
-  \begin{itemize}
-  % \item Example 2: MAP popPK with selective use of informative priors
-  %   for nuisance parameters: pediatric atorvastatin
   \item Model evaluation and comparison
-  \end{itemize}
-%  \textcolor{mrgteal}{Adjourn: 5:00pm}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Introduction to Bayesian pharmacometric data analysis
-    using NONMEM$^\text{\textregistered}$}
-  
-%  \textcolor{mrgteal}{Day 2 Start: 9:00am}
-  \begin{itemize}
   \item Assessing convergence and choosing numbers of burn-in and
     post-burn-in samples
   \item Getting your hands on posterior samples for individual
@@ -241,45 +193,8 @@ Metrum Research Group}
 %  \textcolor{mrgteal}{Break: 10:30--10:45am}
   \begin{itemize}
   \item When stuff goes wrong
-    \begin{itemize}
-    \item Diagnosing and remedying sampling problems encountered with
-      MCMC
-    \item Reparameterization, e.g., centered vs non-centered
-      parameterizations for hierarchical models
-    \item Prior distributions as part of the solution
-    \end{itemize}
-  \end{itemize}
-%  \textcolor{mrgteal}{Lunch: 12:00--1:00pm}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Introduction to Bayesian pharmacometric data analysis
-    using NONMEM$^\text{\textregistered}$}
-  
-%  \textcolor{mrgteal}{Day 2 (cont.)}
-  % \begin{itemize}
-  % \item Example 4: Full Bayes popPKPD using semi-mechanistic model
-  %   \begin{itemize}
-  %   \item Friberg-Karlsson semi-mechanistic model for drug-induced
-  %     myelosuppression
-  %   \item Informative priors for drug-independent system parameters
-  %   \end{itemize}
-  % \end{itemize}
-%  \textcolor{mrgteal}{Break: 3:00--3:15pm}
-  \begin{itemize}
   \item Practical strategies for selecting Bayesian estimation methods
     for specific types of problems
-    \begin{itemize}
-    \item When to go Bayes (and why)?
-    \item Which method?
-    \item Which tool?
-    \end{itemize}
-  % \item Preview of Bayesian data analysis using Stan and Torsten
-  %   \begin{itemize}
-  %   \item Brief intro with demo
-  %   \item Advantages/disadvantages
-  %   \end{itemize}
   \item What didn't we cover?
   \end{itemize}
 %  \textcolor{mrgteal}{Adjourn: 5:00pm}
@@ -530,7 +445,7 @@ p\left(\theta|y\right) &\propto& p\left(\theta\right)p\left(y|\theta\right) = p\
 \begin{itemize}
 \item Posterior mean is a weighted average of prior mean ($\mu_0$) and the sample mean ($\overline{y}$).
 \item Posterior precision $\left(\frac{1}{\tau_n^2}\right)$ is a sum of the prior precision $\left(\frac{1}{\tau_0^2}\right)$ and the data precision $\left(\frac{n}{\sigma^2}\right)$.
-\item The prior can also be interpreted in terms of equivalent number of data points, i.e., $n_0 = \frac{\sigma^2}{\tau_0^2}$.
+% \item The prior can also be interpreted in terms of equivalent number of data points, i.e., $n_0 = \frac{\sigma^2}{\tau_0^2}$.
 \end{itemize}
 \end{footnotesize}
 \vspace{-0.5in}
@@ -635,21 +550,21 @@ The likelihood function $p\left(y | \theta\right)$ contains all the information 
 
 \subsection{Maximum a Posteriori (MAP) Bayes}
 
-\begin{frame}
-  \frametitle{Maximum a Posteriori (MAP) Bayes}
+% \begin{frame}
+%   \frametitle{Maximum a Posteriori (MAP) Bayes}
 
-  \begin{itemize}
-  \item The set of model parameter values that maximize the posterior
-    distribution (aka posterior mode) are called the MAP Bayes
-    parameter estimates.
-  \item MAP Bayes estimation is a useful approximate Bayesian method.
-  \item It is strongly analogous to maximum likelihood (ML)
-    estimation.
-  \item ML estimation tools can often be adapted to calculate MAP
-    Bayes estimates.
-  \end{itemize}
+%   \begin{itemize}
+%   \item The set of model parameter values that maximize the posterior
+%     distribution (aka posterior mode) are called the MAP Bayes
+%     parameter estimates.
+%   \item MAP Bayes estimation is a useful approximate Bayesian method.
+%   \item It is strongly analogous to maximum likelihood (ML)
+%     estimation.
+%   \item ML estimation tools can often be adapted to calculate MAP
+%     Bayes estimates.
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}<article>[shrink]
   \frametitle{\large Recall the NONMEM Maximum Likelihood Objective Function}
@@ -862,269 +777,269 @@ $$E\left(f\left(\theta\right)|y\right) \approx \frac{1}{n}
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{Gibbs sampling}
+% \begin{frame}
+%   \frametitle{Gibbs sampling}
   
-\begin{itemize}
-\item In most cases a convergent Markov chain may be constructed by progressively sampling from the univariate full conditional distributions:
-\begin{eqnarray*}
-\theta_1^i &\sim& p\left(\theta_1|\theta_2^{i-1},\theta_3^{i-1},\ldots,\theta_n^{i-1},y\right) \\
-\theta_2^i &\sim& p\left(\theta_2|\theta_1^i,\theta_3^{i-1},\ldots,\theta_n^{i-1},y\right) \\
-& & \vdots \\
-\theta_n^i &\sim& p\left(\theta_n|\theta_1^i,\theta_2^i,\ldots,\theta_{n-1}^i,y\right) \\
-\end{eqnarray*}
-\item This reduces the multivariate posterior sampling problem to a sequence of more manageable univariate sampling problems.
-\end{itemize}
+% \begin{itemize}
+% \item In most cases a convergent Markov chain may be constructed by progressively sampling from the univariate full conditional distributions:
+% \begin{eqnarray*}
+% \theta_1^i &\sim& p\left(\theta_1|\theta_2^{i-1},\theta_3^{i-1},\ldots,\theta_n^{i-1},y\right) \\
+% \theta_2^i &\sim& p\left(\theta_2|\theta_1^i,\theta_3^{i-1},\ldots,\theta_n^{i-1},y\right) \\
+% & & \vdots \\
+% \theta_n^i &\sim& p\left(\theta_n|\theta_1^i,\theta_2^i,\ldots,\theta_{n-1}^i,y\right) \\
+% \end{eqnarray*}
+% \item This reduces the multivariate posterior sampling problem to a sequence of more manageable univariate sampling problems.
+% \end{itemize}
 
-\note{The full conditional distributions are readily derived from the joint distributions.}
+% \note{The full conditional distributions are readily derived from the joint distributions.}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}<article>
-  \frametitle{Gibbs sampling example}
+% \begin{frame}<article>
+%   \frametitle{Gibbs sampling example}
 
-\begin{itemize}
-\item Data: single observation from a bivariate normal distribution: $y = \left(y_1, y_2\right) \sim N\left(\mu, \Sigma\right)$
-\item Unknown mean: $\mu = \left(\mu_1, \mu_2\right)$
-\item Known covariance matrix: $\Sigma = \left(\begin{array}{cc} 1 & \rho \\ \rho & 1 \end{array}\right)$
-\item Improper uniform prior on $\mu$
-\item The conditional posterior distributions of $\mu_1$ and $\mu_2$ are:
-\end{itemize}
-\begin{eqnarray*}
-\mu_1|\mu_2,y &\sim& N\left(y_1+\rho\left(\mu_2-y_2\right),1-\rho^2\right) \\
-\mu_2|\mu_1,y &\sim& N\left(y_2+\rho\left(\mu_1-y_1\right),1-\rho^2\right) 
-\end{eqnarray*}
+% \begin{itemize}
+% \item Data: single observation from a bivariate normal distribution: $y = \left(y_1, y_2\right) \sim N\left(\mu, \Sigma\right)$
+% \item Unknown mean: $\mu = \left(\mu_1, \mu_2\right)$
+% \item Known covariance matrix: $\Sigma = \left(\begin{array}{cc} 1 & \rho \\ \rho & 1 \end{array}\right)$
+% \item Improper uniform prior on $\mu$
+% \item The conditional posterior distributions of $\mu_1$ and $\mu_2$ are:
+% \end{itemize}
+% \begin{eqnarray*}
+% \mu_1|\mu_2,y &\sim& N\left(y_1+\rho\left(\mu_2-y_2\right),1-\rho^2\right) \\
+% \mu_2|\mu_1,y &\sim& N\left(y_2+\rho\left(\mu_1-y_1\right),1-\rho^2\right) 
+% \end{eqnarray*}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}<article>[fragile]
-  \frametitle{Gibbs sampling example}
+% \begin{frame}<article>[fragile]
+%   \frametitle{Gibbs sampling example}
 
-\begin{itemize}  
-\item $y = (0, 0)$ and $\rho = 0.8$
-\item For this simple case Gibbs sampling can be done with the following short R function (See R script “gibbs.example.R”):
-\end{itemize}
-\begin{lstlisting}[frame=single]
-gibbs1 = function(nsamp,y,sigma2,mu.init){
-## Gibbs sampler for bivariate normal mean with
-## known covariance matrix (sigma2), an improper
-## uniform prior and given one data point (y)
-   mu = matrix(double(2*nsamp),ncol=2)
-   mu[1,] = mu.init
-   for(i in 2:nsamp){
-      mu[i,1] = rnorm.cond(1,1,y,sigma2,mu[i-1,])
-      mu[i,2] = rnorm.cond(1,2,y,sigma2,mu[i,])
-   }
-   mu
-}
-\end{lstlisting}
+% \begin{itemize}  
+% \item $y = (0, 0)$ and $\rho = 0.8$
+% \item For this simple case Gibbs sampling can be done with the following short R function (See R script “gibbs.example.R”):
+% \end{itemize}
+% \begin{lstlisting}[frame=single]
+% gibbs1 = function(nsamp,y,sigma2,mu.init){
+% ## Gibbs sampler for bivariate normal mean with
+% ## known covariance matrix (sigma2), an improper
+% ## uniform prior and given one data point (y)
+%    mu = matrix(double(2*nsamp),ncol=2)
+%    mu[1,] = mu.init
+%    for(i in 2:nsamp){
+%       mu[i,1] = rnorm.cond(1,1,y,sigma2,mu[i-1,])
+%       mu[i,2] = rnorm.cond(1,2,y,sigma2,mu[i,])
+%    }
+%    mu
+% }
+% \end{lstlisting}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}<article>
-  \frametitle{Gibbs sampling example}
+% \begin{frame}<article>
+%   \frametitle{Gibbs sampling example}
   
-4 chains with different starting points
+% 4 chains with different starting points
 
-\vspace{0.5in}
-\hspace{0.35in} 10 samples per chain \hspace{0.9in} 1000 samples per chain \\
-\vspace{-0.5in}
-\includegraphics[width=2.4in]{graphics/gibbsSamplingExample001.pdf}
-\includegraphics[width=2.4in]{graphics/gibbsSamplingExample002.pdf}
+% \vspace{0.5in}
+% \hspace{0.35in} 10 samples per chain \hspace{0.9in} 1000 samples per chain \\
+% \vspace{-0.5in}
+% \includegraphics[width=2.4in]{graphics/gibbsSamplingExample001.pdf}
+% \includegraphics[width=2.4in]{graphics/gibbsSamplingExample002.pdf}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{Metropolis-Hasting algorithm}
+% \begin{frame}
+%   \frametitle{Metropolis-Hasting algorithm}
   
-  \begin{itemize}
-  \item The Metropolis-Hastings is a general purpose multivariate MCMC
-    algorithm.
-\item It requires selection of a conditional proposal density
-  $q\left(y|x\right)$ that is easy to sample from.
-\item To generate $x^{(t+1)} \sim f$ given a previous value $x^{(t)}$:
-\vspace{-12pt}
-\textcolor{blue}{
-%   \begin{algorithmic}[1]
-%   \STATE Generate $y_t \sim q\left(y|x^{(t)}\right)$.
-% \STATE $x^{(t+1)} = \left\{\begin{array}{ll}
-%     y_t, & \text{with probability } \rho\left(x^{(t)}, y_t\right) \\
-%     x^{(t)}, & \text{with probability } 1 - \rho\left(x^{(t)}, y_t\right) 
-% 	\end{array} \right.$ \\
-% where $\displaystyle \rho\left(x, y\right) =
-% \text{min}\left\{\frac{f(y)}{f(x)}\frac{q(x|y)}{q(y|x)}, 1\right\} $
-%   \end{algorithmic}
-\vskip 2em
-  \begin{enumerate}
-  \item Generate $y_t \sim q\left(y|x^{(t)}\right)$.
-  \item $x^{(t+1)} = \left\{\begin{array}{ll}
-      y_t, & \text{with probability } \rho\left(x^{(t)}, y_t\right) \\
-      x^{(t)}, & \text{with probability } 1 - \rho\left(x^{(t)}, y_t\right) 
-    \end{array} \right.$ \\
-  where $\displaystyle \rho\left(x, y\right) =
-  \text{min}\left\{\frac{f(y)}{f(x)}\frac{q(x|y)}{q(y|x)}, 1\right\} $
-  \end{enumerate}
-}
-  \end{itemize}
+%   \begin{itemize}
+%   \item The Metropolis-Hastings is a general purpose multivariate MCMC
+%     algorithm.
+% \item It requires selection of a conditional proposal density
+%   $q\left(y|x\right)$ that is easy to sample from.
+% \item To generate $x^{(t+1)} \sim f$ given a previous value $x^{(t)}$:
+% \vspace{-12pt}
+% \textcolor{blue}{
+% %   \begin{algorithmic}[1]
+% %   \STATE Generate $y_t \sim q\left(y|x^{(t)}\right)$.
+% % \STATE $x^{(t+1)} = \left\{\begin{array}{ll}
+% %     y_t, & \text{with probability } \rho\left(x^{(t)}, y_t\right) \\
+% %     x^{(t)}, & \text{with probability } 1 - \rho\left(x^{(t)}, y_t\right) 
+% % 	\end{array} \right.$ \\
+% % where $\displaystyle \rho\left(x, y\right) =
+% % \text{min}\left\{\frac{f(y)}{f(x)}\frac{q(x|y)}{q(y|x)}, 1\right\} $
+% %   \end{algorithmic}
+% \vskip 2em
+%   \begin{enumerate}
+%   \item Generate $y_t \sim q\left(y|x^{(t)}\right)$.
+%   \item $x^{(t+1)} = \left\{\begin{array}{ll}
+%       y_t, & \text{with probability } \rho\left(x^{(t)}, y_t\right) \\
+%       x^{(t)}, & \text{with probability } 1 - \rho\left(x^{(t)}, y_t\right) 
+%     \end{array} \right.$ \\
+%   where $\displaystyle \rho\left(x, y\right) =
+%   \text{min}\left\{\frac{f(y)}{f(x)}\frac{q(x|y)}{q(y|x)}, 1\right\} $
+%   \end{enumerate}
+% }
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}[shrink]
-  \frametitle{Hamiltonian Monte Carlo (HMC) simulation}
+% \begin{frame}[shrink]
+%   \frametitle{Hamiltonian Monte Carlo (HMC) simulation}
   
-  Physical analogy to motivate HMC
-  \begin{itemize}
-  \item In classical mechanics the Hamiltonian equations describe the
-    evolution of a system over time.
-  \item The state of the system is described in terms of kinetic
-    energy as a function of momentum (mass $\times$ velocity) and
-    potential energy as a function of position.
-  \item For the analogy equate the model parameters $\theta$ to
-    position and equate a set of auxiliary parameters $\rho$ to
-    momentum.
-  \item Now define a Hamiltonian in terms of the joint posterior
-    distribution of $\theta$ and $\rho$:
-    \begin{align*}
-      H(\theta, \rho) &= -\log\left(p\left(\theta, \rho | y\right)\right) 
-                      = -\log\left(p\left(\theta | y\right)
-                        p\left(\rho | \theta, y\right)\right) \\
-                      &= -\log\left(p\left(\theta | y\right)\right)
-                        - \log\left(p\left(\rho | \theta,
-                        y\right)\right) \\
-                      &= V\left(\theta\right) + T\left(\rho |
-                        \theta\right) \\
-      V\left(\theta\right) &= -log\left(p\left(\theta | y\right)\right)
-                             = \text{potential energy} \\
-      T\left(\rho | \theta\right) &= - log\left(p\left(\rho | \theta,  y\right)\right) = \text{kinetic energy}
-    \end{align*}
-  \end{itemize}
+%   Physical analogy to motivate HMC
+%   \begin{itemize}
+%   \item In classical mechanics the Hamiltonian equations describe the
+%     evolution of a system over time.
+%   \item The state of the system is described in terms of kinetic
+%     energy as a function of momentum (mass $\times$ velocity) and
+%     potential energy as a function of position.
+%   \item For the analogy equate the model parameters $\theta$ to
+%     position and equate a set of auxiliary parameters $\rho$ to
+%     momentum.
+%   \item Now define a Hamiltonian in terms of the joint posterior
+%     distribution of $\theta$ and $\rho$:
+%     \begin{align*}
+%       H(\theta, \rho) &= -\log\left(p\left(\theta, \rho | y\right)\right) 
+%                       = -\log\left(p\left(\theta | y\right)
+%                         p\left(\rho | \theta, y\right)\right) \\
+%                       &= -\log\left(p\left(\theta | y\right)\right)
+%                         - \log\left(p\left(\rho | \theta,
+%                         y\right)\right) \\
+%                       &= V\left(\theta\right) + T\left(\rho |
+%                         \theta\right) \\
+%       V\left(\theta\right) &= -log\left(p\left(\theta | y\right)\right)
+%                              = \text{potential energy} \\
+%       T\left(\rho | \theta\right) &= - log\left(p\left(\rho | \theta,  y\right)\right) = \text{kinetic energy}
+%     \end{align*}
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{Hamiltonian Monte Carlo (HMC) simulation}
+% \begin{frame}
+%   \frametitle{Hamiltonian Monte Carlo (HMC) simulation}
   
-  \begin{itemize}
-  \item $\theta$ is what we really care about.
-  \item $\rho$ allows the use of Hamiltonian mechanics to more
-    efficiently move through the relevant parts of the parameter
-    space.
-  \item Usually the distribution of $\rho$ is chosen to be independent of
-    $\theta$, e.g.,
-    $p(\rho | \theta) = p(\rho) = N\left(0, \Sigma\right)$.
-  \item Suppose we place a frictionless particle on the potential
-    energy surface $\left(-log\left(p\left(\theta |
-          y\right)\right)\right)$ at some position $\theta^{t-1}$.
-    \begin{itemize}
-    \item We give it a shove that imparts a momentum $\rho^{t-1}$ to that
-      particle at time $t-1$.
-    \item The particle moves over that surface according to
-      Hamiltonian dynamics.
-    \item Now stop the particle at time $t$ and measure its
-      position $\theta^t$.
-    \item Now randomly sample a new momentum from $p(\rho)$ and give
-      the particle another shove, and so on...
-    \end{itemize}
-  \end{itemize}
+%   \begin{itemize}
+%   \item $\theta$ is what we really care about.
+%   \item $\rho$ allows the use of Hamiltonian mechanics to more
+%     efficiently move through the relevant parts of the parameter
+%     space.
+%   \item Usually the distribution of $\rho$ is chosen to be independent of
+%     $\theta$, e.g.,
+%     $p(\rho | \theta) = p(\rho) = N\left(0, \Sigma\right)$.
+%   \item Suppose we place a frictionless particle on the potential
+%     energy surface $\left(-log\left(p\left(\theta |
+%           y\right)\right)\right)$ at some position $\theta^{t-1}$.
+%     \begin{itemize}
+%     \item We give it a shove that imparts a momentum $\rho^{t-1}$ to that
+%       particle at time $t-1$.
+%     \item The particle moves over that surface according to
+%       Hamiltonian dynamics.
+%     \item Now stop the particle at time $t$ and measure its
+%       position $\theta^t$.
+%     \item Now randomly sample a new momentum from $p(\rho)$ and give
+%       the particle another shove, and so on...
+%     \end{itemize}
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{Hamiltonian Monte Carlo (HMC) simulation}
+% \begin{frame}
+%   \frametitle{Hamiltonian Monte Carlo (HMC) simulation}
   
-  \begin{itemize}
-  \item Though the initial momentum at each step is random, the
-    subsequent path will favor regions of lower potential energy
-    (higher probability density).
-%  \item Thus the particle will spend more time in high probability
-%    regions than in low probability ones.
-  \item The set of sampled positions are distributed according to the
-    target posterior density.
-  \item In practice the Hamiltonian equations are solved
-    numerically. As a result some error is introduced in the estimated
-    path.
-  \item A Metropolis step is used to assure that the position samples
-    converge in distribution to the target distribution.
-  \end{itemize}
+%   \begin{itemize}
+%   \item Though the initial momentum at each step is random, the
+%     subsequent path will favor regions of lower potential energy
+%     (higher probability density).
+% %  \item Thus the particle will spend more time in high probability
+% %    regions than in low probability ones.
+%   \item The set of sampled positions are distributed according to the
+%     target posterior density.
+%   \item In practice the Hamiltonian equations are solved
+%     numerically. As a result some error is introduced in the estimated
+%     path.
+%   \item A Metropolis step is used to assure that the position samples
+%     converge in distribution to the target distribution.
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{The HMC algorithm}
+% \begin{frame}
+%   \frametitle{The HMC algorithm}
   
-Repeat the following steps:
-  \begin{enumerate}
-  \item Sample  $\rho^{t-1} \sim N\left(0, \Sigma\right)$
-\item Simultaneously update $\theta$ and $\rho$ by numerically solving
-  the Hamiltonian equations using the leapfrog method to generate a
-  proposal $\theta^*$ for $\theta^t$.
-\item Apply a Metropolis step to decide whether to
-  accept or reject the proposal $\theta^*$ as $\theta^t$.
-  \end{enumerate}
+% Repeat the following steps:
+%   \begin{enumerate}
+%   \item Sample  $\rho^{t-1} \sim N\left(0, \Sigma\right)$
+% \item Simultaneously update $\theta$ and $\rho$ by numerically solving
+%   the Hamiltonian equations using the leapfrog method to generate a
+%   proposal $\theta^*$ for $\theta^t$.
+% \item Apply a Metropolis step to decide whether to
+%   accept or reject the proposal $\theta^*$ as $\theta^t$.
+%   \end{enumerate}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{The leapfrog method}
+% \begin{frame}
+%   \frametitle{The leapfrog method}
 
-Using the starting values $\theta^{t-1}$ and $\rho^{t-1}$ the leapfrog
-algorithm alternates half-step updates of $\rho$ with full step
-updates of $\theta$:
-\begin{align*}
-  \rho &\leftarrow \rho - \frac{\epsilon}{2} \frac{\partial V}{\partial
-  \theta} = \rho + \frac{\epsilon}{2} \frac{d\log\left(p\left(\theta |
-         Y\right)\right)}{d\theta} \\
-\theta &\leftarrow \theta + \epsilon \Sigma \rho \\
-  \rho &\leftarrow \rho - \frac{\epsilon}{2} \frac{\partial V}{\partial
-  \theta} = \rho + \frac{\epsilon}{2} \frac{d\log\left(p\left(\theta |
-         Y\right)\right)}{d\theta} 
-\end{align*}
-For each HMC iteration repeat this $L$ times to yield the proposal
-values $\theta^*$ and $\rho^*$.
+% Using the starting values $\theta^{t-1}$ and $\rho^{t-1}$ the leapfrog
+% algorithm alternates half-step updates of $\rho$ with full step
+% updates of $\theta$:
+% \begin{align*}
+%   \rho &\leftarrow \rho - \frac{\epsilon}{2} \frac{\partial V}{\partial
+%   \theta} = \rho + \frac{\epsilon}{2} \frac{d\log\left(p\left(\theta |
+%          Y\right)\right)}{d\theta} \\
+% \theta &\leftarrow \theta + \epsilon \Sigma \rho \\
+%   \rho &\leftarrow \rho - \frac{\epsilon}{2} \frac{\partial V}{\partial
+%   \theta} = \rho + \frac{\epsilon}{2} \frac{d\log\left(p\left(\theta |
+%          Y\right)\right)}{d\theta} 
+% \end{align*}
+% For each HMC iteration repeat this $L$ times to yield the proposal
+% values $\theta^*$ and $\rho^*$.
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{The Metropolis step}
+% \begin{frame}
+%   \frametitle{The Metropolis step}
   
-  \begin{itemize}
-  \item Compute the ratio:
-    \begin{align*}
-      r &= \exp\left(H\left(\theta^{t-1}, \rho^{t-1}\right) -
-          H\left(\theta^*, \rho^*\right)\right) \\
-        &= \frac{p\left(\theta^* | y\right) p\left(\rho^*\right)}{p\left(\theta^{t-1} | y\right) p\left(\rho^{t-1}\right)}
-    \end{align*}
-  \item Accept/reject step:
-     $$ \theta^t = \left\{\begin{array}{ll}
-                            \theta^*, & \text{with probability} \min\left(r, 1\right) \\
-                            \theta^{t-1}, & \text{otherwise}
-                          \end{array} \right. $$
-\item Since $\rho$ is sampled independently of
-                        $\theta$ and previous values of $\rho$, we
-                        just discard $\rho^*$ and sample a new value
-                        for the next HMC iteration.
-\end{itemize}
+%   \begin{itemize}
+%   \item Compute the ratio:
+%     \begin{align*}
+%       r &= \exp\left(H\left(\theta^{t-1}, \rho^{t-1}\right) -
+%           H\left(\theta^*, \rho^*\right)\right) \\
+%         &= \frac{p\left(\theta^* | y\right) p\left(\rho^*\right)}{p\left(\theta^{t-1} | y\right) p\left(\rho^{t-1}\right)}
+%     \end{align*}
+%   \item Accept/reject step:
+%      $$ \theta^t = \left\{\begin{array}{ll}
+%                             \theta^*, & \text{with probability} \min\left(r, 1\right) \\
+%                             \theta^{t-1}, & \text{otherwise}
+%                           \end{array} \right. $$
+% \item Since $\rho$ is sampled independently of
+%                         $\theta$ and previous values of $\rho$, we
+%                         just discard $\rho^*$ and sample a new value
+%                         for the next HMC iteration.
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{HMC algorithm parameters}
+% \begin{frame}
+%   \frametitle{HMC algorithm parameters}
   
-Parameters that must be set: discretization time $\epsilon$, number of
-leapfrog steps $L$ and mass matrix $\Sigma^{-1}$.\\ \ \\
-Sampling efficiency is very sensitive to those parameters:
-\begin{itemize}
-\item $\epsilon$ too large $\rightarrow$ too many proposals rejected
-\item $\epsilon$ too small $\rightarrow$ long simulation times
-\item $L$ too large $\rightarrow$ too much work for each iteration
-\item $L$ too small $\rightarrow$ devolves to a random walk
-\item If $\Sigma^{-1}$ is poorly tuned to the problem, $\epsilon$
-  needs to be decreased and $L$ increased to maintain precision and efficiency. 
-\end{itemize}
-Stan automatically optimizes those parameters using the NUTS (no
-U-turn sampling) algorithm \cite{hoffman2014}. 
+% Parameters that must be set: discretization time $\epsilon$, number of
+% leapfrog steps $L$ and mass matrix $\Sigma^{-1}$.\\ \ \\
+% Sampling efficiency is very sensitive to those parameters:
+% \begin{itemize}
+% \item $\epsilon$ too large $\rightarrow$ too many proposals rejected
+% \item $\epsilon$ too small $\rightarrow$ long simulation times
+% \item $L$ too large $\rightarrow$ too much work for each iteration
+% \item $L$ too small $\rightarrow$ devolves to a random walk
+% \item If $\Sigma^{-1}$ is poorly tuned to the problem, $\epsilon$
+%   needs to be decreased and $L$ increased to maintain precision and efficiency. 
+% \end{itemize}
+% Stan automatically optimizes those parameters using the NUTS (no
+% U-turn sampling) algorithm \cite{hoffman2014}. 
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}
   \frametitle{HMC performance}
@@ -1187,23 +1102,23 @@ U-turn sampling) algorithm \cite{hoffman2014}.
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{Prior specification in NONMEM}
+% \begin{frame}
+%   \frametitle{Prior specification in NONMEM}
   
-  \begin{itemize}
-  \item THETA: (multivariate) normal distribution
-  \item OMEGA \& SIGMA: inverse Wishart
-    \begin{itemize}
-    \item NUTS also supports
-      \begin{itemize}
-      \item lognormal or half-t distributions for SDs, i.e., square
-        roots of the diagonal elements of OMEGA or SIGMA
-      \item LKJ distribution for the correlation matrix
-      \end{itemize}
-    \end{itemize}
-    \end{itemize}
+%   \begin{itemize}
+%   \item THETA: (multivariate) normal distribution
+%   \item OMEGA \& SIGMA: inverse Wishart
+%     \begin{itemize}
+%     \item NUTS also supports
+%       \begin{itemize}
+%       \item lognormal or half-t distributions for SDs, i.e., square
+%         roots of the diagonal elements of OMEGA or SIGMA
+%       \item LKJ distribution for the correlation matrix
+%       \end{itemize}
+%     \end{itemize}
+%     \end{itemize}
 
-  \end{frame}
+%   \end{frame}
 
   \begin{frame}<article>
     \frametitle{Some NONMEM bugs/issues involving BAYES \& NUTS}
@@ -1857,11 +1772,6 @@ Not well defined, but here's an attempt at some loose definitions:
 \begin{itemize}
 \item Look for chains to converge to a common distribution
 \item You want chain history plots to look more like straight horizontal “fuzzy caterpillars” than “wiggly snakes”
-\item Monitor Gelman-Rubin diagnostics (Rhat) and/or Gelman-Rubin-Brooks plots
-\begin{itemize}
-\item Essentially ratios of total variance to within chain variance.
-\item Should approach 1 for all parameters of interest on convergence
-\end{itemize}
 \end{itemize}
 \end{itemize}
 \column{0.4\textwidth}
@@ -1872,6 +1782,59 @@ Poor convergence \& mixing\\
 \vspace{-8pt}
 Good convergence \& mixing\\
 \includegraphics[width=\textwidth,height=0.4\textheight]{graphics/goodConvergence.pdf}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Assessing convergence \& adequacy of sample sizes}
+
+\begin{columns}
+  \column{0.6\textwidth}
+  \begin{itemize}
+    \item Gelman-Rubin diagnostics (Rhat or $\hat{R}$)
+          \begin{itemize}
+            \item Essentially ratios of total variance to within chain variance.
+            \item Should approach 1 for all parameters of interest on convergence
+          \end{itemize}
+    \item Effective sample size (ESS)
+          \begin{itemize}
+            \item Measure of sampling efficiency
+            \item Bulk (location of distribution)
+            \item Tail (5th and 95th percentiles of distribution)
+            \item Desire ESS $>$ $\approx$400
+          \end{itemize}
+  \end{itemize}
+  \column{0.4\textwidth}
+  \center
+  \vspace{-16pt}
+  \includegraphics[width=\textwidth]{graphics/poor-ess.pdf}\\
+  Bulk ESS = 188\\
+  Tail ESS = 354\\
+  Rhat = 1.01
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Assessing convergence \& adequacy of sample sizes}
+
+\begin{columns}
+  \column{0.4\textwidth}
+  \begin{itemize}
+    \item ESS vs draw
+          \begin{itemize}
+            \item Will longer chains solve convergence issues?
+          \end{itemize}
+    \item ESS vs quantile
+          \begin{itemize}
+            \item Ensure convergence across all quantities of interest
+          \end{itemize}
+  \end{itemize}
+  \column{0.6\textwidth}
+  \center
+  \vspace{-16pt}
+  \includegraphics[width=\textwidth]{graphics/ess-vs-draw-quantile.pdf}
 \end{columns}
 
 \end{frame}
@@ -1896,8 +1859,8 @@ of burn-in samples.
 \item Number of samples depends on the inference(s) of interest and the desired precision
 \item For independent samples:
 \begin{itemize}
-\item A posterior mean of a parameter $\theta$ is estimated with an error of $\sim \frac{s_\theta}{\sqrt{n}}$ where $s_\theta$ is the standard deviation of the simulated values of $\theta$ and $n$ is the number of samples.
-\item A probability $p$ is estimated with an error of $\sim \sqrt{\frac{p(1-p)}{n}}$.
+\item A posterior mean of a parameter $\theta$ is estimated with an error of $\approx \frac{s_\theta}{\sqrt{n}}$ where $s_\theta$ is the standard deviation of the simulated values of $\theta$ and $n$ is the number of samples.
+\item A probability $p$ is estimated with an error of $\approx \sqrt{\frac{p(1-p)}{n}}$.
 \end{itemize}
 \item In general more samples are required for estimating tail quantiles and probabilities than for central tendencies and probabilities near 0.5
 \end{itemize}
@@ -1943,94 +1906,58 @@ For more rigorous and comprehensive treatment see Robert and
   your hands on posterior samples for individual parameters and
   predictions}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Getting your hands on posterior samples for individual
     parameters and predictions}
 
   \begin{itemize}
-  \item With METHOD = BAYES or NUTS NONMEM writes MCMC sampled
-    parameter values to a file named in the \$ESTIMATION statement
+  \item With \verb|METHOD = BAYES| or \verb|NUTS NONMEM| writes MCMC sampled
+    parameter values to a file named in the \verb|\$ESTIMATION| statement
     (Defaults to $<$model name$>$.ext).
   \item Only population parameters are written.
-  \item Before NONMEM 7.5: Use FORTRAN WRITE statements (verbatim code) to write
+  \item Before NONMEM 7.5: Use \verb|FORTRAN WRITE| statements (verbatim code) to write
     individual parameter or prediction values to files.
-  \item NONMEM 7.5: Use \$EST ... BAYES\_PHI\_STORE=1 to generate $<$model name$>$.iph
+  \item NONMEM 7.5: Use \verb|\$EST ... BAYES\_PHI\_STORE=1| to generate $<$model name$>$.iph
   \end{itemize}
   
 \end{frame}
 
-\section{Priors for covariance matrices (OMEGA \& SIGMA)}
+% \section{Priors for covariance matrices (OMEGA \& SIGMA)}
 
-\begin{frame}
-  \frametitle{Priors for covariance matrices (OMEGA \& SIGMA)}
+% \begin{frame}
+%   \frametitle{Priors for covariance matrices (OMEGA \& SIGMA)}
 
-    \begin{itemize}
-  \item METHOD = BAYES
-    \begin{itemize}
-    \item Inverse Wishart
-    \end{itemize}
-    \item METHOD = NUTS
-      \begin{itemize}
-      \item OLKJDF = 0: Inverse Wishart
-       \item OLKJDF $>$ 0: LKJ distribution for the correlation matrix
-         with shape parameter = OLKJDF
-         \begin{itemize}
-         \item OVARF $>$ 0: lognormal distribution for
-           $\sqrt{\Omega_{ii}}$ where $\Omega_{ii}$ is a diagonal
-           element of OMEGA parameterized as:
-           $$
-           \log(\sqrt{\Omega_{ii}}) \sim
-           N\left(\log\left(\sqrt{\text{OmegaPrior(i,i)}}\right), \frac{1}{\text{OVARF}}\right).
-           $$
-         \end{itemize}
-       \item OVARF $<$ 0:  half-t distribution for
-           $\sqrt{\Omega_{ii}}$ where $\Omega_{ii}$ is a diagonal
-           element of OMEGA parameterized as:
-           $$
-           \sqrt{\Omega_{ii}} \sim \text{half-}t\left(0,
-             \sqrt{\text{OmegaPrior(i,i)}}, \left|OVARF\right|\right)
-             $$
-     \end{itemize}
-    \end{itemize}
+%     \begin{itemize}
+%   \item METHOD = BAYES
+%     \begin{itemize}
+%     \item Inverse Wishart
+%     \end{itemize}
+%     \item METHOD = NUTS
+%       \begin{itemize}
+%       \item OLKJDF = 0: Inverse Wishart
+%        \item OLKJDF $>$ 0: LKJ distribution for the correlation matrix
+%          with shape parameter = OLKJDF
+%          \begin{itemize}
+%          \item OVARF $>$ 0: lognormal distribution for
+%            $\sqrt{\Omega_{ii}}$ where $\Omega_{ii}$ is a diagonal
+%            element of OMEGA parameterized as:
+%            $$
+%            \log(\sqrt{\Omega_{ii}}) \sim
+%            N\left(\log\left(\sqrt{\text{OmegaPrior(i,i)}}\right), \frac{1}{\text{OVARF}}\right).
+%            $$
+%          \end{itemize}
+%        \item OVARF $<$ 0:  half-t distribution for
+%            $\sqrt{\Omega_{ii}}$ where $\Omega_{ii}$ is a diagonal
+%            element of OMEGA parameterized as:
+%            $$
+%            \sqrt{\Omega_{ii}} \sim \text{half-}t\left(0,
+%              \sqrt{\text{OmegaPrior(i,i)}}, \left|OVARF\right|\right)
+%              $$
+%      \end{itemize}
+%     \end{itemize}
 
   
-\end{frame}
-
-\begin{frame}
-  \frametitle{NONMEM parameterization of the inverse Wishart distribution}
-  
-NONMEM implementation of inverse Wishart prior for $\Omega$ (or
-    $\Sigma$):
-    \begin{align*}
-      \Omega &\sim W^{-1}\left(\nu\Omega_\text{prior}, \nu\right) \\
-W^{-1} &= \text{Standard parameterization of the inverse Wishart} \\
-\nu &= \text{degrees of freedom} \\
-E\left(\Omega\right) &= \frac{\nu\Omega_\text{prior}}{\nu - n - 1} \\
-\text{Var}\left(\Omega_{ii}\right) &= \frac{E\left(\Omega_{ii}\right)  \left(\nu - n -
-                          1\right)}{\nu} \\
-n &= \text{dim}\left(\Omega\right)
-    \end{align*}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Inverse Wishart distribution}
-
-Guidance for setting $Omega_\text{prior}$ and $\nu$:
-\begin{align*}
-  \nu_i &=
-  \frac{2E\left(\Omega_{ii}\right)^2}{\text{Var}\left(\Omega_{ii}\right)} + n
-  + 3 \\
-\Omega_{\text{prior},ii} &= \frac{E\left(\Omega_{ii}\right)\left(\nu_i - n -
-                          1\right)}{\nu_i} \\
-\end{align*}
-\begin{itemize}
-\item Set diagonal elements of $\Omega_\text{prior}$ to the calculated values
-of $\Omega_{\text{prior},ii}$
-\item Set $\nu = \text{min}\left(\nu_i\right)$.
-\end{itemize}
-
-\end{frame}
+% \end{frame}
 
 % \section[Example 3: Full Bayes popPK]{Example 3: Full Bayes popPK with selective use of
 %   informative priors}
@@ -2119,8 +2046,20 @@ The main strategies are:
 \end{frame}
 
 \begin{frame}
-  \frametitle{Centered (CP) and non-centered (NCP) parameterization
-    with NONMEM}
+  \frametitle{Devil's funnel}
+
+\begin{columns}
+  \column{0.6\textwidth}
+  \includegraphics[width=\textwidth]{graphics/devils-funnel.pdf}
+  \column{0.6\textwidth}
+  $y \sim N(0, 3)$\\
+  $x \sim N(0, \exp(y/2))$
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Centered (CP) and non-centered (NCP) parameterization}
   
 Consider an individual parameter $\phi_i \sim N(\mu, \omega)$.
 \begin{itemize}
@@ -2138,7 +2077,7 @@ Consider an individual parameter $\phi_i \sim N(\mu, \omega)$.
 
 
 \begin{frame}
-  \frametitle{Centered (CP) and non-centered (NCP) parameterization}
+  \frametitle{Centered (CP) and non-centered (NCP) parameterization in NONMEM}
   
   \begin{itemize}
   \item For NUTS, 
@@ -2195,166 +2134,440 @@ our knowledge and should be the preferred approach.
 
 
 
-\section{Example 4: Full Bayes popPKPD using semi-mechanistic model}
+% \section{Example 4: Full Bayes popPKPD using semi-mechanistic model}
 
-\begin{frame}
-  \frametitle{Example 4: Full Bayes popPKPD using semi-mechanistic
-    model}
+% \begin{frame}
+%   \frametitle{Example 4: Full Bayes popPKPD using semi-mechanistic
+%     model}
   
-PKPD model of drug-induced neutropenia
+% PKPD model of drug-induced neutropenia
 
-\begin{center}
-\includegraphics[width=0.48\textwidth]{graphics/neutropenia1TorstenNcpPlots001.pdf}
-\includegraphics[width=0.48\textwidth]{graphics/neutropenia1TorstenNcpPlots002.pdf}
-\end{center}
+% \begin{center}
+% \includegraphics[width=0.48\textwidth]{graphics/neutropenia1TorstenNcpPlots001.pdf}
+% \includegraphics[width=0.48\textwidth]{graphics/neutropenia1TorstenNcpPlots002.pdf}
+% \end{center}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{Friberg-Karlsson semi-mechanistic model for
-drug-induced myelosuppression}
+% \begin{frame}
+%   \frametitle{Friberg-Karlsson semi-mechanistic model for
+% drug-induced myelosuppression}
 
-  \begin{itemize}
-\item PK model: Two compartment model with first order absorption describing
-  plasma drug concentration on the $i^{th}$ occasion in the $j^{th}$
-  subject as a function of time, dose and body weight:
-  \begin{scriptsize}
-    \begin{eqnarray*}
-      \log\left(c_{ij}\right) &\sim& N\left(\log\left(\hat{c}_{ij}\right),\sigma\right) \\
-      \hat{c}_{ij} &=&
-                       f_{2cpt}\left(t_{ij},D_j,\tau_j,CL_j,Q_j,V_{1j},V_{2j},k_{aj}\right) 
-    \end{eqnarray*}
-  \end{scriptsize}
-  \item Friberg-Karlsson semi-mechanistic model for
-drug-induced myelosuppression \cite{Friberg2002-tt,Friberg2003-ki,Latz2006-dk,Troconiz2006-nq,Kathman2007-ne}
-(Figure 2 of reference \cite{Friberg2002-tt})
-  \end{itemize}
-\vspace{-6pt}
-\begin{center}
-\includegraphics[width=0.75\textwidth]{graphics/neutrophilModel.jpg}
-\end{center}
+%   \begin{itemize}
+% \item PK model: Two compartment model with first order absorption describing
+%   plasma drug concentration on the $i^{th}$ occasion in the $j^{th}$
+%   subject as a function of time, dose and body weight:
+%   \begin{scriptsize}
+%     \begin{eqnarray*}
+%       \log\left(c_{ij}\right) &\sim& N\left(\log\left(\hat{c}_{ij}\right),\sigma\right) \\
+%       \hat{c}_{ij} &=&
+%                        f_{2cpt}\left(t_{ij},D_j,\tau_j,CL_j,Q_j,V_{1j},V_{2j},k_{aj}\right) 
+%     \end{eqnarray*}
+%   \end{scriptsize}
+%   \item Friberg-Karlsson semi-mechanistic model for
+% drug-induced myelosuppression \cite{Friberg2002-tt,Friberg2003-ki,Latz2006-dk,Troconiz2006-nq,Kathman2007-ne}
+% (Figure 2 of reference \cite{Friberg2002-tt})
+%   \end{itemize}
+% \vspace{-6pt}
+% \begin{center}
+% \includegraphics[width=0.75\textwidth]{graphics/neutrophilModel.jpg}
+% \end{center}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{Friberg-Karlsson semi-mechanistic model for
-drug-induced myelosuppression}
+% \begin{frame}
+%   \frametitle{Friberg-Karlsson semi-mechanistic model for
+% drug-induced myelosuppression}
 
-\begin{columns}
-\column{0.5\textwidth}
-\begin{footnotesize}
-  \begin{eqnarray*}
-    \frac{dProl}{dt} &=& \textcolor{red}{k_{prol}}Prol\left(1 -
-      E_{drug}\right)\left(\frac{\textcolor{red}{Circ_0}}{Circ}\right)^{\textcolor{red}{\gamma}} -
-    \textcolor{red}{k_{tr}}Prol \\
-\frac{dTransit1}{dt} &=& \textcolor{red}{k_{tr}}Prol - \textcolor{red}{k_{tr}}Transit1 \\
-\frac{dTransit2}{dt} &=& \textcolor{red}{k_{tr}}Transit1 - \textcolor{red}{k_{tr}}Transit2 \\
-\frac{dTransit3}{dt} &=& \textcolor{red}{k_{tr}}Transit2 - \textcolor{red}{k_{tr}}Transit3 \\
-\frac{dCirc}{dt} &=& \textcolor{red}{k_{tr}}Transit3 - \textcolor{red}{k_{circ}}Circ \\
-  \end{eqnarray*}
-\vspace{-0.25in}
-  \begin{eqnarray*}
-%    E_{drug} &=& \frac{E_{max} \widehat{c}}{EC_{50} + \widehat{c}} \\
-    E_{drug} &=& \alpha \widehat{c} \\
-\textcolor{red}{k_{prol}} &=& \textcolor{red}{k_{circ}} = \textcolor{red}{k_{tr}} \\
-\textcolor{red}{MTT} &=& \frac{n + 1}{\textcolor{red}{k_{tr}}}
-  \end{eqnarray*}
-\end{footnotesize}
-\column{0.5\textwidth}
-\begin{footnotesize}
-\begin{eqnarray*}
-  \widehat{c} &\equiv& \text{plasma drug concentration} \\
-Circ &\equiv& \text{absolute neutrophil count (ANC)}
-\end{eqnarray*}
-\end{footnotesize}
+% \begin{columns}
+% \column{0.5\textwidth}
+% \begin{footnotesize}
+%   \begin{eqnarray*}
+%     \frac{dProl}{dt} &=& \textcolor{red}{k_{prol}}Prol\left(1 -
+%       E_{drug}\right)\left(\frac{\textcolor{red}{Circ_0}}{Circ}\right)^{\textcolor{red}{\gamma}} -
+%     \textcolor{red}{k_{tr}}Prol \\
+% \frac{dTransit1}{dt} &=& \textcolor{red}{k_{tr}}Prol - \textcolor{red}{k_{tr}}Transit1 \\
+% \frac{dTransit2}{dt} &=& \textcolor{red}{k_{tr}}Transit1 - \textcolor{red}{k_{tr}}Transit2 \\
+% \frac{dTransit3}{dt} &=& \textcolor{red}{k_{tr}}Transit2 - \textcolor{red}{k_{tr}}Transit3 \\
+% \frac{dCirc}{dt} &=& \textcolor{red}{k_{tr}}Transit3 - \textcolor{red}{k_{circ}}Circ \\
+%   \end{eqnarray*}
+% \vspace{-0.25in}
+%   \begin{eqnarray*}
+% %    E_{drug} &=& \frac{E_{max} \widehat{c}}{EC_{50} + \widehat{c}} \\
+%     E_{drug} &=& \alpha \widehat{c} \\
+% \textcolor{red}{k_{prol}} &=& \textcolor{red}{k_{circ}} = \textcolor{red}{k_{tr}} \\
+% \textcolor{red}{MTT} &=& \frac{n + 1}{\textcolor{red}{k_{tr}}}
+%   \end{eqnarray*}
+% \end{footnotesize}
+% \column{0.5\textwidth}
+% \begin{footnotesize}
+% \begin{eqnarray*}
+%   \widehat{c} &\equiv& \text{plasma drug concentration} \\
+% Circ &\equiv& \text{absolute neutrophil count (ANC)}
+% \end{eqnarray*}
+% \end{footnotesize}
  
-Parameters in \textcolor{red}{red} are {\em system} parameters, i.e., drug-independent.
-\end{columns}
+% Parameters in \textcolor{red}{red} are {\em system} parameters, i.e., drug-independent.
+% \end{columns}
+
+% \end{frame}
+
+% \begin{frame}
+% \frametitle{Friberg-Karlsson model}
+
+% \vspace{-24pt}
+%   \begin{scriptsize}
+%     \begin{align*}
+%      \log\left(c_i\right) &\sim
+%                                 N\left(\log\left(\hat{c}_i\right),\sigma_{PK}\right)
+%                                 &  \log\left(ANC_i\right) &\sim
+%                                                                    N\left(\log\left(\text{Circ}_i\right),\sigma_{PD}\right) \\
+%       \hat{c}_i &= \frac{x_{2i}}{V_{1}} 
+%       & \text{Circ}_{i} &= x_{8i} \\
+% x_1^\prime &= -k_a x_1 &
+% x_2^\prime &= k_a x_1 - \frac{CL + Q}{V_1} x_2 + \frac{Q}{V_2}
+%              x_3 \\
+% x_3^\prime &= \frac{CL + Q}{V_1} x_2 - \frac{Q}{V_2}  x_3 &
+% x_4^\prime &= k_{tr} \text{Prol} \left((1 - E_\text{drug})
+%              \left(\frac{\text{Circ}_0}{\text{Circ}}\right)^\gamma -
+%              1\right) \\ 
+% x_5^\prime &= k_{tr} (\text{Prol} - \text{Transit}_1) &
+% x_6^\prime &= k_{tr} (\text{Transit}_1 - \text{Transit}_2) \\
+% x_7^\prime &= k_{tr} (\text{Transit}_2 - \text{Transit}_3) &
+% x_8^\prime &= k_{tr} (\text{Transit}_3 - \text{Circ}) \\
+% \text{where} \\
+% x_4 &= \text{Prol}  &
+% x_5 &= \text{Transit}_1 \\
+% x_6 &= \text{Transit}_2 &
+%  x_7 &= \text{Transit}_3 \\
+% x_8 &= \text{Circ} &
+% k_{tr} &= \frac{4}{MTT} \\
+% x\left(0\right) &= \left\{0, 0, 0, \text{Circ}_0, \text{Circ}_0,
+%                   \text{Circ}_0, \text{Circ}_0, \text{Circ}_0\right\}
+%     \end{align*}
+%   \end{scriptsize}
+
+% \end{frame}
+
+% \begin{frame}[shrink]
+%   \frametitle{IIV and prior distributions}
+
+%   \begin{itemize}
+%   \footnotesize
+% \item Inter-individual variation
+%   \begin{scriptsize}
+%     \begin{eqnarray*}
+%       \lefteqn{\log\left(CL_j,Q_j,V_{1j},V_{2j},k_{aj},MTT_j,Circ_{0j},\alpha_j\right)}\ \ \ \ \ \ \ \ \ \ \ \  \\
+%       &\sim& N\left(\log\left(\widehat{CL}\left(\frac{bw_j}{70}\right)^{0.75},\widehat{Q}\left(\frac{bw_j}{70}\right)^{0.75},
+%           \widehat{V}_1\left(\frac{bw_j}{70}\right),\widehat{V}_2\left(\frac{bw_j}{70}\right),\widehat{k}_a,\right.\right.
+%              \\
+%     & & \left. \left.\widehat{MTT}, \widehat{Circ_0}, \widehat{\alpha}\right),\Omega\right)
+%     \end{eqnarray*}
+%   \end{scriptsize}
+% \item Prior distributions: moderately informative for PK, strongly
+%   informative for system parameters, weakly informative for drug effect
+%   \begin{scriptsize}
+%     \begin{eqnarray*}
+%       \widehat{CL} &\sim&  \log N\left(\log(10),
+%                                            0.5\right) \;\;
+%                                            \widehat{Q}
+%                                            \sim  \log N\left(\log(15),
+%                                            0.5\right) \;\;
+%       \widehat{V}_1 \sim  \log N\left(\log(35), 0.5\right) \\
+%       \widehat{V}_2 &\sim&  \log N\left(\log(105), 0.5\right) \;\;
+%       \widehat{k}_a \sim
+%                                             \log N\left(\log(2),
+%                            0.5\right) \\
+%       \widehat{MTT} &\sim& \log N\left(\log(125), 0.2\right) \;\; 
+%       \widehat{Circ_0} \sim \log N\left(\log(5), 0.2\right) \;\;
+%       \gamma \sim \log N\left(\log(0.17), 0.2\right) \\
+%       \widehat{\alpha} &\sim& \log N\left(\log(3\times 10^{-4}), 1\right) \\
+%      \Omega &\sim& \text{inverse Wishart}\left(\left[\begin{array}{cccccccc}
+%                  0.045 & 0 & 0 & 0 & 0 & 0 & 0 & 0  \\
+%                  0 & 0.045 & 0 & 0 & 0 & 0 & 0 & 0 \\  
+%                  0 & 0 & 0.045 & 0 & 0 & 0 & 0 & 0 \\  
+%                  0 & 0 & 0 & 0.045 & 0 & 0 & 0 & 0 \\  
+%                  0 & 0 & 0 & 0 & 0.045 & 0 & 0 & 0 \\  
+%                  0 & 0 & 0 & 0 & 0 & 0.045 & 0 & 0 \\  
+%                  0 & 0 & 0 & 0 & 0 & 0 & 0.045 & 0 \\  
+%                  0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.045
+%     \end{array}\right], 11\right)
+%     \end{eqnarray*}
+%   \end{scriptsize}
+% \end{itemize}
+
+% \end{frame}
+
+\section{Other considerations for NONMEM}
+
+\begin{frame}
+  \frametitle{Other considerations for NONMEM}
+
+  \begin{itemize}
+  \item Control stream
+    \begin{itemize}
+      \item Priors
+      \item Initial estimates
+      % \item Estimation options
+    \end{itemize}
+  \item Diagnostics
+    \begin{itemize}
+      \item MCMC diagnostics
+      \item Model diagnostics
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{NONMEM control stream}
+
+\begin{itemize}
+  \item MU reference when possible
+        \begin{itemize}
+          \item Allow Gibbs sampling (vs MH) for \verb|METHOD=BAYES|
+          \item Analytic derivatives for \verb|METHOD=NUTS|
+        \end{itemize}
+  \item Prefer unbounded THETAs
+        \begin{itemize}
+          \item Log or logit transform where possible
+        \end{itemize}
+  \item Specify as many priors as possible
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{NONMEM control stream: priors for THETAs}
+
+\begin{itemize}
+  \item Normal distribution
+        \begin{itemize}
+          \item Mean \verb|$THETAP|
+          \item Variance \verb|$THETAPV|
+                \begin{itemize}
+                  \item Shorthand: \\
+                        \verb|$THETAPV BLOCK(5) FIXED VALUES(10,0)|
+                \end{itemize}
+        \end{itemize}
+  \item t-distribution (\verb|METHOD=NUTS|)
+        \begin{itemize}
+          \item Set degrees of freedom in \verb|$EST TTDF| or \verb|$TTDF|
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{NONMEM control stream: priors for OMEGAs}
+
+\begin{itemize}
+  \item Inverse Wishart distribution
+  \begin{itemize}
+    \item Mode \verb|$OMEGAP|
+    \item Degrees of freedom \verb|$OMEGAPD|
+  \end{itemize}
+  \item Additional options for \verb|METHOD=NUTS|:
+        \begin{itemize}
+          \item Lognormal or half-t-distribution for SDs (\verb|$EST OVARF|)
+          \item Lewandowski-Kurowicka-Joe (LKJ) distribution for correlation matrix (\verb|$EST OLKJDF|)
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{NONMEM control stream: priors for SIGMAs}
+
+\begin{itemize}
+  \item Inverse Wishart distribution
+  \begin{itemize}
+    \item Mode \verb|$SIGMAP|
+    \item Degrees of freedom \verb|$SIGMAPD|
+  \end{itemize}
+  \item Additional options for \verb|METHOD=NUTS|:
+        \begin{itemize}
+          \item Lognormal or half-t-distribution for SDs (\verb|$EST SVARF|)
+          \item Lewandowski-Kurowicka-Joe (LKJ) distribution for correlation matrix (\verb|$EST SLKJDF|)
+        \end{itemize}
+\end{itemize}
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Friberg-Karlsson model}
-
-\vspace{-24pt}
-  \begin{scriptsize}
+  \frametitle{NONMEM parameterization of the inverse Wishart distribution}
+  
+NONMEM implementation of inverse Wishart prior for $\Omega$ (or
+    $\Sigma$):
     \begin{align*}
-     \log\left(c_i\right) &\sim
-                                N\left(\log\left(\hat{c}_i\right),\sigma_{PK}\right)
-                                &  \log\left(ANC_i\right) &\sim
-                                                                   N\left(\log\left(\text{Circ}_i\right),\sigma_{PD}\right) \\
-      \hat{c}_i &= \frac{x_{2i}}{V_{1}} 
-      & \text{Circ}_{i} &= x_{8i} \\
-x_1^\prime &= -k_a x_1 &
-x_2^\prime &= k_a x_1 - \frac{CL + Q}{V_1} x_2 + \frac{Q}{V_2}
-             x_3 \\
-x_3^\prime &= \frac{CL + Q}{V_1} x_2 - \frac{Q}{V_2}  x_3 &
-x_4^\prime &= k_{tr} \text{Prol} \left((1 - E_\text{drug})
-             \left(\frac{\text{Circ}_0}{\text{Circ}}\right)^\gamma -
-             1\right) \\ 
-x_5^\prime &= k_{tr} (\text{Prol} - \text{Transit}_1) &
-x_6^\prime &= k_{tr} (\text{Transit}_1 - \text{Transit}_2) \\
-x_7^\prime &= k_{tr} (\text{Transit}_2 - \text{Transit}_3) &
-x_8^\prime &= k_{tr} (\text{Transit}_3 - \text{Circ}) \\
-\text{where} \\
-x_4 &= \text{Prol}  &
-x_5 &= \text{Transit}_1 \\
-x_6 &= \text{Transit}_2 &
- x_7 &= \text{Transit}_3 \\
-x_8 &= \text{Circ} &
-k_{tr} &= \frac{4}{MTT} \\
-x\left(0\right) &= \left\{0, 0, 0, \text{Circ}_0, \text{Circ}_0,
-                  \text{Circ}_0, \text{Circ}_0, \text{Circ}_0\right\}
+      \Omega &\sim W^{-1}\left(\nu\Omega_\text{prior}, \nu\right) \\
+W^{-1} &= \text{Standard parameterization of the inverse Wishart} \\
+\nu &= \text{degrees of freedom} \\
+E\left(\Omega\right) &= \frac{\nu\Omega_\text{prior}}{\nu - n - 1} \\
+\text{Var}\left(\Omega_{ii}\right) &= \frac{E\left(\Omega_{ii}\right)  \left(\nu - n -
+                          1\right)}{\nu} \\
+n &= \text{dim}\left(\Omega\right)
     \end{align*}
-  \end{scriptsize}
 
 \end{frame}
 
-\begin{frame}[shrink]
-  \frametitle{IIV and prior distributions}
+\begin{frame}
+  \frametitle{Inverse Wishart distribution}
 
-  \begin{itemize}
-  \footnotesize
-\item Inter-individual variation
-  \begin{scriptsize}
-    \begin{eqnarray*}
-      \lefteqn{\log\left(CL_j,Q_j,V_{1j},V_{2j},k_{aj},MTT_j,Circ_{0j},\alpha_j\right)}\ \ \ \ \ \ \ \ \ \ \ \  \\
-      &\sim& N\left(\log\left(\widehat{CL}\left(\frac{bw_j}{70}\right)^{0.75},\widehat{Q}\left(\frac{bw_j}{70}\right)^{0.75},
-          \widehat{V}_1\left(\frac{bw_j}{70}\right),\widehat{V}_2\left(\frac{bw_j}{70}\right),\widehat{k}_a,\right.\right.
-             \\
-    & & \left. \left.\widehat{MTT}, \widehat{Circ_0}, \widehat{\alpha}\right),\Omega\right)
-    \end{eqnarray*}
-  \end{scriptsize}
-\item Prior distributions: moderately informative for PK, strongly
-  informative for system parameters, weakly informative for drug effect
-  \begin{scriptsize}
-    \begin{eqnarray*}
-      \widehat{CL} &\sim&  \log N\left(\log(10),
-                                           0.5\right) \;\;
-                                           \widehat{Q}
-                                           \sim  \log N\left(\log(15),
-                                           0.5\right) \;\;
-      \widehat{V}_1 \sim  \log N\left(\log(35), 0.5\right) \\
-      \widehat{V}_2 &\sim&  \log N\left(\log(105), 0.5\right) \;\;
-      \widehat{k}_a \sim
-                                            \log N\left(\log(2),
-                           0.5\right) \\
-      \widehat{MTT} &\sim& \log N\left(\log(125), 0.2\right) \;\; 
-      \widehat{Circ_0} \sim \log N\left(\log(5), 0.2\right) \;\;
-      \gamma \sim \log N\left(\log(0.17), 0.2\right) \\
-      \widehat{\alpha} &\sim& \log N\left(\log(3\times 10^{-4}), 1\right) \\
-     \Omega &\sim& \text{inverse Wishart}\left(\left[\begin{array}{cccccccc}
-                 0.045 & 0 & 0 & 0 & 0 & 0 & 0 & 0  \\
-                 0 & 0.045 & 0 & 0 & 0 & 0 & 0 & 0 \\  
-                 0 & 0 & 0.045 & 0 & 0 & 0 & 0 & 0 \\  
-                 0 & 0 & 0 & 0.045 & 0 & 0 & 0 & 0 \\  
-                 0 & 0 & 0 & 0 & 0.045 & 0 & 0 & 0 \\  
-                 0 & 0 & 0 & 0 & 0 & 0.045 & 0 & 0 \\  
-                 0 & 0 & 0 & 0 & 0 & 0 & 0.045 & 0 \\  
-                 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.045
-    \end{array}\right], 11\right)
-    \end{eqnarray*}
-  \end{scriptsize}
+Guidance for setting $Omega_\text{prior}$ and $\nu$:
+\begin{align*}
+  \nu_i &=
+  \frac{2E\left(\Omega_{ii}\right)^2}{\text{Var}\left(\Omega_{ii}\right)} + n
+  + 3 \\
+\Omega_{\text{prior},ii} &= \frac{E\left(\Omega_{ii}\right)\left(\nu_i - n -
+                          1\right)}{\nu_i} \\
+\end{align*}
+\begin{itemize}
+\item Set diagonal elements of $\Omega_\text{prior}$ to the calculated values
+of $\Omega_{\text{prior},ii}$
+\item Set $\nu = \text{min}\left(\nu_i\right)$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Estimation options: initial estimates}
+
+\begin{itemize}
+  \item Multiple (e.g., 4) chains using \verb|METHOD=CHAIN|.
+        \begin{itemize}
+          \item Generate 4 sets of initial estimates with \verb|METHOD=CHAIN NSAMPLE=4 FILE=1000.chn|
+          \item Use \verb|CTYPE| option to sample initial THETAs from
+                \begin{itemize}
+                  \item uniform (\% above and below \verb|$THETA|), or
+                  \item bounds in \verb|$THETA| (not recommended!), or
+                  \item normal distribution defined by \verb|$THETAP| and \verb|$THETAPV|
+                \end{itemize}
+          \item OMEGA and SIGMA initial estimates from inverse Wishart distributions
+                \begin{itemize}
+                  \item Degrees of freedom from \verb|DF| and \verb|DFS|
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Bayesian diagnostics in NONMEM}
+
+\begin{itemize}
+  \item Diagnostics should consider full posterior (across all chains)
+  \item NONMEM generates summaries (means, standard errors, shrinkages, etc.) \textcolor{mrggreen}{\bf within each chain}
+  \item Further post-processing is required to summarize and diagnose models \textcolor{mrggreen}{\bf across all chains}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{NONMEM output needs some tweaking}
+
+\begin{itemize}
+  \item NONMEM will output means of parameter estimates
+        \begin{itemize}
+          \item Probably OK for THETAs, can introduce bias for variance terms
+        \end{itemize}
+  \item \$TABLE outputs
+        \begin{itemize}
+          \item ETA values not derived across posterior distribution, but post hoc estimates using mean of THETAs/OMEGAs
+                \begin{itemize}
+                  \item May result in spurious correlations
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Better to derive estimates/diagnostics using the full posterior: PREDs and IPREDs}
+
+\begin{itemize}
+  \item Simulate S replicates:
+        \begin{itemize}
+          \item $y_{ijs}^{\text{sim,PRED}}$
+                \begin{itemize}
+                  \item include all variability, sample from posterior at each replicate
+                \end{itemize}
+          \item $y_{ijs}^{\text{sim,IPRED}}$
+                \begin{itemize}
+                  \item include within-subject variability, posterior samples of population parameters and ETAs
+                \end{itemize}
+        \end{itemize}
+        \begin{itemize}
+          \item Calculate:
+                \begin{itemize}
+                  \item $\text{PRED}_{ij} = \frac{1}{S} \sum_{s=1}^{S} y_{ijs}^{\text{sim,PRED}}$
+                  \item $\text{IPRED}_{ij} = \frac{1}{S} \sum_{s=1}^{S} y_{ijs}^{\text{sim,IPRED}}$
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Better to derive estimates/diagnostics using the full posterior: Shrinkage}
+
+\begin{itemize}
+  \item Shrinkage = $1 - \frac{\text{SD}_{k=1}^K(\overline{\eta_k})}{\sqrt{\overline{\Omega}}}$
+        \begin{itemize}
+                \item $\overline{\eta_k}$ is mean of ETA posterior samples for subject k
+                \item $\text{SD}_{k=1}^K$ is standard deviation across K subjects
+                \item $\overline{\Omega}$ is mean of OMEGA estimates across posterior samples
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Better to derive estimates/diagnostics using the full posterior: NPDE}
+
+  \begin{columns}
+    \column{0.5\textwidth}
+\begin{itemize}
+  \item Can be calculated with npde R package
+  \item Reuse output from PRED simulations:\\
+  $y_{ijs}^{\text{sim,PRED}} \Rightarrow Y_i^{\text{sim}(k)}$
+\end{itemize}
+    \column{0.5\textwidth}
+    \fbox{\includegraphics[width=\textwidth]{graphics/npde-equations.pdf}}
+    \cite{Comets2008-lz}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Model selection criteria: what not to use}
+
+\begin{itemize}
+  \item Traditional objective function comparison not appropriate
+  \item Alternatives: AIC, DIC, WAIC, cross-validation
+        \begin{itemize}
+          \item \textcolor{mrggreen}{AIC}: not suitable for strong informative priors
+          \item \textcolor{mrggreen}{DIC}: unreliable for non-Gaussian posteriors
+          \item \textcolor{mrggreen}{WAIC}: not robust with weak priors or influential observations
+          \item \textcolor{mrggreen}{Cross-validation}: too computationally demanding
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Model selection: Use PSIS-LOO}
+
+\begin{itemize}
+  \item \textcolor{mrggreen}{PSIS}: Pareto smoothed importance sampling
+  \item \textcolor{mrggreen}{LOO}: leave-one-out cross-validation\\
+  \quad $\widehat{\text{elpd}}_{\text{psis-loo}} = \sum_{i=1}^n \log\left(\frac{\sum_{s=1}^S w_i^s p(y_i|\theta^s)}{\sum_{s=1}^S w_i^s}\right)$
+  \vspace{1em}
+  \item Available using \verb|loo| R package
+  \item \textcolor{mrggreen}{$p(y_i|\theta^s)$} is likelihood for a subject or observation at a given posterior sample
+        \begin{itemize}
+          \item Requires post hoc calculation with posterior ETAs
+        \end{itemize}
 \end{itemize}
 
 \end{frame}
@@ -2406,6 +2619,17 @@ x\left(0\right) &= \left\{0, 0, 0, \text{Circ}_0, \text{Circ}_0,
   \item MAP Bayes for more rapid exploration of multiple models
     followed by MCMC for the final model (or small set of contenders).
   \item Generally prefer NUTS over MH/Gibbs (BAYES)
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Which method?}
+  
+  \begin{itemize}
+  \item MH (Metropolis-Hastings) is ``meh''
+  \item Gibbs is ``good''
+  \item HMC (NUTS) is ``how maestros compute''
   \end{itemize}
 
 \end{frame}
@@ -3015,6 +3239,17 @@ x\left(0\right) &= \left\{0, 0, 0, \text{Circ}_0, \text{Circ}_0,
     \item \href{https://metrumrg.com/course/introduction-to-bayesian-pharmacometric-data-analysis-with-nonmem/}{Introduction to Bayesian pharmacometric data analysis with NONMEM} (ACoP 2019 workshop by Bill Gillespie and Curtis Johnston)
     \item Bauer RJ. NONMEM Tutorial Part II: Estimation Methods and Advanced Examples. \emph{CPT Pharmacometrics Syst Pharmacol}. 2019;8(8):538-556. \href{https://doi.org/10.1002/psp4.12422}{doi:10.1002/psp4.12422}
     \item Supplementary code for NONMEM Bayes tutorial paper (submitted): \url{https://github.com/metrumresearchgroup/NMBayesTutorial}
+  \end{itemize}
+\end{frame}
+
+\section{Example PK model}
+
+\begin{frame}{Example PK model}
+
+  \begin{itemize}
+    \item 2-compartment PK model
+    \item Several covariates on clearance
+    \item GitHub repo with models/scripts (and these slides): \url{https://github.com/timwaterhouse/iu-nonmem-bayes-2023}
   \end{itemize}
 \end{frame}
 
