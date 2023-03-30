@@ -4,12 +4,12 @@
 % \usepackage{hyperref}
 
 %% for slides
-% \documentclass{beamer} 
+\documentclass{beamer} 
 
 %% for handouts
-\documentclass[handout]{beamer} 
-\usepackage{pgfpages} 
-\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm] 
+% \documentclass[handout]{beamer} 
+% \usepackage{pgfpages} 
+% \pgfpagesuselayout{2 on 1}[letterpaper,border shrink=5mm] 
 
 \usepackage{textpos}
 \usepackage{helvet}
@@ -95,8 +95,7 @@
 }
 
 
-\title[Bayesian data analysis using NONMEM$^\text{\textregistered}$]{Introduction to
-  Bayesian pharmacometric data analysis using NONMEM$^\text{\textregistered}$} 
+\title[Bayesian analysis in NONMEM]{Bayesian analysis in NONMEM} 
 
 \author{Tim Waterhouse\\
 Metrum Research Group} 
@@ -172,30 +171,30 @@ Metrum Research Group}
 % \end{frame}
 
 \begin{frame}
-  \frametitle{Introduction to Bayesian pharmacometric data analysis
-    using NONMEM$^\text{\textregistered}$}
+  \frametitle{Bayesian analysis in NONMEM}
   
 %  \textcolor{mrgteal}{Day 1 Start: 9:00am}
   \begin{itemize}
-\item Why Bayesian?
-  \item Introduction to Bayesian statistical principles and methods
-  \item Computation for Bayesian modeling
-  \item Overview of NONMEM$^\text{\textregistered}$ implementations
-  \item Prior distributions
-  \item Model evaluation and comparison
-  \item Assessing convergence and choosing numbers of burn-in and
+  \item<1-> Why Bayesian?
+  \item<2-> Introduction to Bayesian statistical principles and methods
+  \item<3-> Computation for Bayesian modeling
+  \item<4-> Overview of NONMEM$^\text{\textregistered}$ implementations
+  \item<5-> Prior distributions
+  \item<6-> Model evaluation and comparison
+  \item<7-> Assessing convergence and choosing numbers of burn-in and
     post-burn-in samples
-  \item Getting your hands on posterior samples for individual
+  \item<8-> Getting your hands on posterior samples for individual
     parameters and predictions
   % \item Example 3: Full Bayes popPK with selective use of informative
   %   priors for nuisance parameters: pediatric atorvastatin
-  \end{itemize}
+  % \end{itemize}
 %  \textcolor{mrgteal}{Break: 10:30--10:45am}
-  \begin{itemize}
-  \item When stuff goes wrong
-  \item Practical strategies for selecting Bayesian estimation methods
+  % \begin{itemize}
+  \item<9-> When stuff goes wrong
+  \item<10-> Practical strategies for selecting Bayesian estimation methods
     for specific types of problems
-  \item What didn't we cover?
+  \item<11-> Example Bayesian analysis
+  % \item What didn't we cover?
   \end{itemize}
 %  \textcolor{mrgteal}{Adjourn: 5:00pm}
 
@@ -266,23 +265,23 @@ Cloud-based computer access via \href{http://metrumrg.com/solution/metworx/}{\in
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{Why Bayesian analysis for pharmacometrics applications?}
+% \begin{frame}
+%   \frametitle{Why Bayesian analysis for pharmacometrics applications?}
   
-  \begin{itemize}
-  \item Decision-making supported by quantitative synthesis of prior
-    knowledge and heterogenous data.
-  \item Calibration (and recalibration) of complex QSP models as new
-    data accumulates.
-  \item Bayesian framework more easily accommodates
-    \begin{itemize}
-    \item model complexity, particularly in the stochastic structure
-      of a model,
-    \item analysis of data from heterogeneous sources.
-    \end{itemize}
-  \end{itemize}
+%   \begin{itemize}
+%   \item Decision-making supported by quantitative synthesis of prior
+%     knowledge and heterogenous data.
+%   \item Calibration (and recalibration) of complex QSP models as new
+%     data accumulates.
+%   \item Bayesian framework more easily accommodates
+%     \begin{itemize}
+%     \item model complexity, particularly in the stochastic structure
+%       of a model,
+%     \item analysis of data from heterogeneous sources.
+%     \end{itemize}
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 \section{Introduction to Bayesian statistical principles and methods}
 
@@ -315,39 +314,39 @@ Cloud-based computer access via \href{http://metrumrg.com/solution/metworx/}{\in
 
 %\subsection{Bayesian approach to uncertainty}
 
-\begin{frame}{Bayesian approach to uncertainty}
+% \begin{frame}{Bayesian approach to uncertainty}
 
-\begin{itemize}
-\item Uncertainty is described in terms of probability:
-\begin{itemize}
- \item Can assign a quantitative description of uncertainty in the model parameters and evaluate how it affects the uncertainty in predicted outcomes.
-\item Probability can be used to quantitatively represent uncertainty based on either “objective” evidence/data or “subjective” expert opinion or belief.
-\end{itemize}
-\end{itemize}
-\vspace{-0.35in}
-\mode<beamer>{\only<1>{\includegraphics[width=4.5in]{graphics/clDensity001.pdf}}}
-\only<2>{\includegraphics[width=4.5in]{graphics/clDensity002.pdf}}
+% \begin{itemize}
+% \item Uncertainty is described in terms of probability:
+% \begin{itemize}
+%  \item Can assign a quantitative description of uncertainty in the model parameters and evaluate how it affects the uncertainty in predicted outcomes.
+% \item Probability can be used to quantitatively represent uncertainty based on either “objective” evidence/data or “subjective” expert opinion or belief.
+% \end{itemize}
+% \end{itemize}
+% \vspace{-0.35in}
+% \mode<beamer>{\only<1>{\includegraphics[width=4.5in]{graphics/clDensity001.pdf}}}
+% \only<2>{\includegraphics[width=4.5in]{graphics/clDensity002.pdf}}
 
-\end{frame}
+% \end{frame}
 
-\subsection{Bayesian approach to statistical inference}
+% \subsection{Bayesian approach to statistical inference}
 
-\begin{frame}{Bayesian approach to statistical inference}
+% \begin{frame}{Bayesian approach to statistical inference}
 
-\begin{itemize}
-\item Model parameters and predictions are described in terms of probability distributions representing uncertainty.
-\item Results reflect the combined evidence of data and prior knowledge or belief.
-\item Focuses on estimation and inferences related to probabilities of unknown quantities: parameters, future data, hypotheses.
-\item Inferences may be described directly in terms of probabilities, e.g.,
-\begin{itemize}
-  \item What is the probability that a parameter or a function of parameters is
-  within or outside of a specific interval?
-  \item What is the lowest dose that will achieve a $\ge$ 80\% probability
-    of reaching an efficacy or safety target?
-\end{itemize}
-\end{itemize}
+% \begin{itemize}
+% \item Model parameters and predictions are described in terms of probability distributions representing uncertainty.
+% \item Results reflect the combined evidence of data and prior knowledge or belief.
+% \item Focuses on estimation and inferences related to probabilities of unknown quantities: parameters, future data, hypotheses.
+% \item Inferences may be described directly in terms of probabilities, e.g.,
+% \begin{itemize}
+%   \item What is the probability that a parameter or a function of parameters is
+%   within or outside of a specific interval?
+%   \item What is the lowest dose that will achieve a $\ge$ 80\% probability
+%     of reaching an efficacy or safety target?
+% \end{itemize}
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 %\subsection{Bayesian applications}
 
@@ -532,16 +531,16 @@ The likelihood function $p\left(y | \theta\right)$ contains all the information 
   \frametitle{Computation for Bayesian modeling}
 
   \begin{itemize}
-  \item Full Bayesian analysis requires:
+  \item<1-> Full Bayesian analysis requires:
     \begin{itemize}
     \item Characterization of the joint posterior distribution of
       model parameters and of predicted outcomes.
     \item Integration of that joint posterior distribution to
       calculate quantities required for statistical inferences.
     \end{itemize}
-  \item For most realistic problems, those are very computationally
+  \item<2-> For most realistic problems, those are very computationally
     demanding tasks.
-  \item Increases in computation speed and development of new
+  \item<3-> Increases in computation speed and development of new
     algorithms over the last 25--30 years have finally made full
     Bayesian analysis a feasible option for routine data analysis.
   \end{itemize}
@@ -656,12 +655,12 @@ Where:
   \frametitle{Full Bayesian analysis}
 
   \begin{itemize}
-\item Full Bayesian analysis refers to characterization of the joint
+\item<1-> Full Bayesian analysis refers to characterization of the joint
 posterior distribution, not just its mode.
-\item Most Bayesian inference is based on univariate marginal
+\item<2-> Most Bayesian inference is based on univariate marginal
   posterior distributions of individual parameters or functions of
  those parameters.
-\item That requires integration of the joint posterior distribution,
+\item<3-> That requires integration of the joint posterior distribution,
   usually over several dimensions.
   \end{itemize}
 
@@ -671,11 +670,11 @@ posterior distribution, not just its mode.
   \frametitle{Full Bayesian analysis}
 
   \begin{itemize}
-  \item If you're lucky those integrals have known analytic solutions,
+  \item<1-> If you're lucky those integrals have known analytic solutions,
     but that is rarely true for PK/PD modeling applications.
-  \item For integrals in fewer dimensions, a numerical
+  \item<2-> For integrals in fewer dimensions, a numerical
     quadrature method might be practical. 
-  \item Now imagine the computational requirements for hierarchical
+  \item<3-> Now imagine the computational requirements for hierarchical
     models, e.g., population PK models, with individual-specific
     parameters in the hundreds!!
   \end{itemize}
@@ -686,44 +685,44 @@ posterior distribution, not just its mode.
   \frametitle{Posterior simulation}
 
   \begin{itemize}
-  \item What if you could simulate samples of $\theta$ from the joint
+  \item<1-> What if you could simulate samples of $\theta$ from the joint
     posterior distribution?
-  \item Then you could estimate
+  \item<2-> Then you could estimate
     $E\left(f\left(\theta\right)|y\right)$ by the arithmetic mean:
 $$E\left(f\left(\theta\right)|y\right) \approx \frac{1}{n}
 \sum_{i=1}^n f\left(\theta_i\right)$$
-\item More generally, you could characterize the properties of any
+\item<3-> More generally, you could characterize the properties of any
   marginal posterior distribution of a model parameter or function of
   model parameters, e.g., moments, quantiles, ...
-\item But how do you simulate samples from a high dimensional joint
+\item<4-> But how do you simulate samples from a high dimensional joint
   posterior distribution?
-\item Markov chain Monte Carlo (MCMC) simulation via NONMEM is one
+\item<5-> Markov chain Monte Carlo (MCMC) simulation via NONMEM is one
   approach we will explore today.
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Inferences from posterior simulations}
+% \begin{frame}{Inferences from posterior simulations}
 
-  \begin{itemize}
-  \item Posterior simulation yields vectors of parameters and/or
-    predictions from a joint posterior distribution
-  \item Marginal distributions
-    \begin{itemize}
-    \item To describe the posterior distribution of any scalar
-      function of the parameters apply the function to each simulated
-      vector. The empirical distribution of those values approximates
-      the posterior distribution.
-    \item The marginal distribution of any single parameter is just a
-      special case of that approach.
-    \end{itemize}
-  \item Inferences are usually based on moments, probabilities or
-    percentiles from marginal posterior distributions. They are
-    readily estimated from the corresponding sample statistics for the
-    simulated values.
-  \end{itemize}
+%   \begin{itemize}
+%   \item Posterior simulation yields vectors of parameters and/or
+%     predictions from a joint posterior distribution
+%   \item Marginal distributions
+%     \begin{itemize}
+%     \item To describe the posterior distribution of any scalar
+%       function of the parameters apply the function to each simulated
+%       vector. The empirical distribution of those values approximates
+%       the posterior distribution.
+%     \item The marginal distribution of any single parameter is just a
+%       special case of that approach.
+%     \end{itemize}
+%   \item Inferences are usually based on moments, probabilities or
+%     percentiles from marginal posterior distributions. They are
+%     readily estimated from the corresponding sample statistics for the
+%     simulated values.
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 \subsection{Markov chain Monte Carlo (MCMC) simulation}
 
@@ -755,20 +754,20 @@ $$E\left(f\left(\theta\right)|y\right) \approx \frac{1}{n}
 \begin{frame}{Markov Chain Monte Carlo (MCMC) simulation}
 
 \begin{itemize}
-\item Involves random draws from approximate distributions and then correcting those draws to better approximate the joint posterior.
-\item The samples are drawn sequentially so that each draw depends on the previous one, thus forming a Markov chain.
-\item Eventually the Markov chain converges (in distribution) to a stationary distribution that is the joint posterior distribution.
-\item Algorithms for MCMC include:
+\item<1-> Involves random draws from approximate distributions and then correcting those draws to better approximate the joint posterior.
+\item<2-> The samples are drawn sequentially so that each draw depends on the previous one, thus forming a Markov chain.
+\item<3-> Eventually the Markov chain converges (in distribution) to a stationary distribution that is the joint posterior distribution.
+\item<4-> Algorithms for MCMC include:
 \begin{itemize}
 \item Metropolis-Hastings algorithm
 \item Gibbs sampling
 \item Hamiltonian Monte Carlo (HMC) simulation
 \end{itemize}
-\item MCMC samples are serially correlated:
+\item<5-> MCMC samples are serially correlated:
 \begin{itemize}
 \item Inferences based on MCMC require more samples than would be required for independent samples
 \end{itemize}
-\item Practical consequences:
+\item<6-> Practical consequences:
 \begin{itemize}
 \item Use only samples drawn after convergence is achieved, i.e., discard samples from a “warmup” phase.
 \item Draw more samples than you would for independent random draws.
@@ -1055,32 +1054,33 @@ $$E\left(f\left(\theta\right)|y\right) \approx \frac{1}{n}
   \frametitle{HMC performance}
   
   \begin{center}
-    \includegraphics[width=0.9\textwidth]{graphics/samplingCompare1.pdf}
+    \includegraphics[width=0.8\textwidth]{graphics/samplingCompare1.pdf}
   \end{center}
 {\scriptsize from MD Hoffman and A Gelman. The no-U-turn
   sampler: Adaptively setting path lengths in Hamiltonian Monte Carlo
-  (2014) \cite{hoffman2014}}
+  (2014) \cite{hoffman2014}\\
+  Also see: \url{http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/}}
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{HMC issues/limitations}
+% \begin{frame}
+%   \frametitle{HMC issues/limitations}
   
-  \begin{itemize}
-  \item Requires calculation of the gradient
-    $\frac{d\log\left(p\left(\theta | Y\right)\right)}{d\theta}$
-  \item Suitable for sampling of continuous parameters only
-    \begin{itemize}
-    \item Cannot sample discrete parameters
-    \item Discrete data is OK as long as the likelihood depends only
-      on continuous parameters.
-    \item Models with discrete parameters, e.g., finite mixture
-      models, can often be implemented by marginalizing out the
-      discrete parameters.
-    \end{itemize}
-  \end{itemize}
+%   \begin{itemize}
+%   \item Requires calculation of the gradient
+%     $\frac{d\log\left(p\left(\theta | Y\right)\right)}{d\theta}$
+%   \item Suitable for sampling of continuous parameters only
+%     \begin{itemize}
+%     \item Cannot sample discrete parameters
+%     \item Discrete data is OK as long as the likelihood depends only
+%       on continuous parameters.
+%     \item Models with discrete parameters, e.g., finite mixture
+%       models, can often be implemented by marginalizing out the
+%       discrete parameters.
+%     \end{itemize}
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 \section{Overview of NONMEM implementations}
 
@@ -1088,7 +1088,7 @@ $$E\left(f\left(\theta\right)|y\right) \approx \frac{1}{n}
   \frametitle{Overview of NONMEM implementations}
   
   \begin{itemize}
-  \item MAP estimation
+  \item<1-> MAP estimation
     \begin{itemize}
     \item Using prior distributions with any optimization method
     \end{itemize}
@@ -1097,6 +1097,12 @@ $$E\left(f\left(\theta\right)|y\right) \approx \frac{1}{n}
     \item METHOD = BAYES: Metropolis-Hastings within Gibbs sampling
     \item METHOD = NUTS: No U-turn sampler (HMC with automatic
       optimization of sampling parameters)
+    \item<2-> Remember:
+      \begin{itemize}
+        \item MH (Metropolis-Hastings) is ``meh''
+        \item Gibbs is ``good''
+        \item HMC (NUTS) is ``how maestros compute''
+      \end{itemize}
     \end{itemize}
   \end{itemize}
 
@@ -1281,31 +1287,31 @@ $$E\left(f\left(\theta\right)|y\right) \approx \frac{1}{n}
   \frametitle{Brief discussion on prior distributions}
 
   \begin{itemize}
-  \item Think of prior distributions as part of the model.
-\item Priors should be chosen and 
-subjected to scrutiny much like other model components.
-\item Model checking should ideally include sensitivity analysis of
-  the priors.
-\item Choice of priors is most critical with sparse or limited data.
+  \item<1-> Think of prior distributions as part of the model.
+  \item<2-> Priors should be chosen and 
+  subjected to scrutiny much like other model components.
+  \item<3-> Model checking should ideally include sensitivity analysis of
+    the priors.
+  \item<4-> Choice of priors is most critical with sparse or limited data.
   \end{itemize}
 
 See \url{https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations}
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{What is the function of a prior distribution}
+% \begin{frame}
+%   \frametitle{What is the function of a prior distribution?}
 
-  \begin{itemize}
-  \item<1-> Represent prior knowledge
-\item<2-> Regularization to facilitate computation
-  \begin{itemize}
- \item Typically weakly-moderately informative
-\item E.g., Cauchy with most of its mass in a plausible range, but heavy tails allow for diagnosis of prior-posterior discrepancies.
-  \end{itemize}
-  \end{itemize}
+%   \begin{itemize}
+%   \item<1-> Represent prior knowledge
+% \item<2-> Regularization to facilitate computation
+%   \begin{itemize}
+%  \item Typically weakly-moderately informative
+% \item E.g., Cauchy with most of its mass in a plausible range, but heavy tails allow for diagnosis of prior-posterior discrepancies.
+%   \end{itemize}
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}
   \frametitle{What does it mean to be informative, uninformative or
@@ -1852,75 +1858,55 @@ of burn-in samples.
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{How many samples?}
+% \begin{frame}
+%   \frametitle{How many samples?}
   
-\begin{itemize}
-\item Number of samples depends on the inference(s) of interest and the desired precision
-\item For independent samples:
-\begin{itemize}
-\item A posterior mean of a parameter $\theta$ is estimated with an error of $\approx \frac{s_\theta}{\sqrt{n}}$ where $s_\theta$ is the standard deviation of the simulated values of $\theta$ and $n$ is the number of samples.
-\item A probability $p$ is estimated with an error of $\approx \sqrt{\frac{p(1-p)}{n}}$.
-\end{itemize}
-\item In general more samples are required for estimating tail quantiles and probabilities than for central tendencies and probabilities near 0.5
-\end{itemize}
+% \begin{itemize}
+% \item Number of samples depends on the inference(s) of interest and the desired precision
+% \item For independent samples:
+% \begin{itemize}
+% \item A posterior mean of a parameter $\theta$ is estimated with an error of $\approx \frac{s_\theta}{\sqrt{n}}$ where $s_\theta$ is the standard deviation of the simulated values of $\theta$ and $n$ is the number of samples.
+% \item A probability $p$ is estimated with an error of $\approx \sqrt{\frac{p(1-p)}{n}}$.
+% \end{itemize}
+% \item In general more samples are required for estimating tail quantiles and probabilities than for central tendencies and probabilities near 0.5
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{How many samples?}
+% \begin{frame}
+%   \frametitle{How many samples?}
 
-\vspace{-0.1in}
-\begin{footnotesize}
-\begin{itemize}
-\item Suppose the posterior distribution of $\theta$ is $N\left(\mu = 10, \sigma = 2\right)$.
-\item What if we use simulation to estimate various features of that distribution?
-\item The following are bootstrap estimates of error due to simulation:
-\end{itemize}
-\end{footnotesize}
 % \vspace{-0.1in}
-\includegraphics[width=2.2in]{graphics/simPrecision001.png}
-\includegraphics[width=2.2in]{graphics/simPrecision002.png}
+% \begin{footnotesize}
+% \begin{itemize}
+% \item Suppose the posterior distribution of $\theta$ is $N\left(\mu = 10, \sigma = 2\right)$.
+% \item What if we use simulation to estimate various features of that distribution?
+% \item The following are bootstrap estimates of error due to simulation:
+% \end{itemize}
+% \end{footnotesize}
+% % \vspace{-0.1in}
+% \includegraphics[width=2.2in]{graphics/simPrecision001.png}
+% \includegraphics[width=2.2in]{graphics/simPrecision002.png}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{How many MCMC samples?}
+% \begin{frame}
+%   \frametitle{How many MCMC samples?}
   
-\begin{itemize}
-\item Given a set of MCMC samples it is possible to adjust for autocorrelation to estimate:
-\begin{itemize}
-\item The equivalent number of independent samples, aka effective
-  sample size (n\_eff)
-\item The standard error in the estimated posterior mean
-\item The rstan print and summary functions provide estimates of each.
-\end{itemize}
-\item Guidance based on independent samples may then be applied
-\end{itemize}
-For more rigorous and comprehensive treatment see Robert and
-  Casella 2004  and 2010 \cite{robertAndCasella2004,robertAndCasella2010}.
+% \begin{itemize}
+% \item Given a set of MCMC samples it is possible to adjust for autocorrelation to estimate:
+% \begin{itemize}
+% \item The equivalent number of independent samples, aka effective
+%   sample size (n\_eff)
+% \item The standard error in the estimated posterior mean
+% \item The rstan print and summary functions provide estimates of each.
+% \end{itemize}
+% \item Guidance based on independent samples may then be applied
+% \end{itemize}
+% For more rigorous and comprehensive treatment see Robert and
+%   Casella 2004  and 2010 \cite{robertAndCasella2004,robertAndCasella2010}.
 
-\end{frame}
-
-\section[Getting posterior samples for individual parameters]{Getting
-  your hands on posterior samples for individual parameters and
-  predictions}
-
-\begin{frame}[fragile]
-  \frametitle{Getting your hands on posterior samples for individual
-    parameters and predictions}
-
-  \begin{itemize}
-  \item With \verb|METHOD = BAYES| or \verb|NUTS NONMEM| writes MCMC sampled
-    parameter values to a file named in the \verb|\$ESTIMATION| statement
-    (Defaults to $<$model name$>$.ext).
-  \item Only population parameters are written.
-  \item Before NONMEM 7.5: Use \verb|FORTRAN WRITE| statements (verbatim code) to write
-    individual parameter or prediction values to files.
-  \item NONMEM 7.5: Use \verb|\$EST ... BAYES\_PHI\_STORE=1| to generate $<$model name$>$.iph
-  \end{itemize}
-  
-\end{frame}
+% \end{frame}
 
 % \section{Priors for covariance matrices (OMEGA \& SIGMA)}
 
@@ -2030,18 +2016,18 @@ The main strategies are:
   \frametitle{Reparameterization}
 
   \begin{itemize}
-  \item Model parameterization can markedly affect the geometry of the
-    joint posterior distribution.
-\item Posterior distributions with extreme curvature or sharp
-  transitions lead to sampling inefficiency or outright failure.
-\item A well-selected reparameterization can often ``smooth out'' the
-  geometry, thereby improving sampling performance.
-\item For example switch from centered to non-centered parameterization (or vice
-  versa) of random effects in hierarchical models.
-\item Other reparameterizations that reduce posterior curvature and
-  correlation, e.g., truncated Emax parameterization.
-\item Use MU referencing when possible with BAYES and NUTS.
-\end{itemize}
+    \item<1-> Model parameterization can markedly affect the geometry of the
+      joint posterior distribution.
+    \item<2-> Posterior distributions with extreme curvature or sharp
+      transitions lead to sampling inefficiency or outright failure.
+    \item<3-> A well-selected reparameterization can often ``smooth out'' the
+      geometry, thereby improving sampling performance.
+    \item<4-> For example switch from centered to non-centered parameterization (or vice
+      versa) of random effects in hierarchical models.
+    \item<5-> Other reparameterizations that reduce posterior curvature and
+      correlation, e.g., truncated Emax parameterization.
+    \item<6-> Use MU referencing when possible with BAYES and NUTS.
+  \end{itemize}
   
 \end{frame}
 
@@ -2323,16 +2309,16 @@ our knowledge and should be the preferred approach.
   \frametitle{NONMEM control stream}
 
 \begin{itemize}
-  \item MU reference when possible
+  \item<1-> MU reference when possible
         \begin{itemize}
           \item Allow Gibbs sampling (vs MH) for \verb|METHOD=BAYES|
           \item Analytic derivatives for \verb|METHOD=NUTS|
         \end{itemize}
-  \item Prefer unbounded THETAs
+  \item<2-> Prefer unbounded THETAs
         \begin{itemize}
           \item Log or logit transform where possible
         \end{itemize}
-  \item Specify as many priors as possible
+  \item<3-> Specify as many priors as possible
 \end{itemize}
 
 \end{frame}
@@ -2341,7 +2327,7 @@ our knowledge and should be the preferred approach.
   \frametitle{NONMEM control stream: priors for THETAs}
 
 \begin{itemize}
-  \item Normal distribution
+  \item<1-> Normal distribution
         \begin{itemize}
           \item Mean \verb|$THETAP|
           \item Variance \verb|$THETAPV|
@@ -2350,7 +2336,7 @@ our knowledge and should be the preferred approach.
                         \verb|$THETAPV BLOCK(5) FIXED VALUES(10,0)|
                 \end{itemize}
         \end{itemize}
-  \item t-distribution (\verb|METHOD=NUTS|)
+  \item<2-> t-distribution (\verb|METHOD=NUTS|)
         \begin{itemize}
           \item Set degrees of freedom in \verb|$EST TTDF| or \verb|$TTDF|
         \end{itemize}
@@ -2362,12 +2348,12 @@ our knowledge and should be the preferred approach.
   \frametitle{NONMEM control stream: priors for OMEGAs}
 
 \begin{itemize}
-  \item Inverse Wishart distribution
+  \item<1-> Inverse Wishart distribution
   \begin{itemize}
     \item Mode \verb|$OMEGAP|
     \item Degrees of freedom \verb|$OMEGAPD|
   \end{itemize}
-  \item Additional options for \verb|METHOD=NUTS|:
+  \item<2-> Additional options for \verb|METHOD=NUTS|:
         \begin{itemize}
           \item Lognormal or half-t-distribution for SDs (\verb|$EST OVARF|)
           \item Lewandowski-Kurowicka-Joe (LKJ) distribution for correlation matrix (\verb|$EST OLKJDF|)
@@ -2380,12 +2366,12 @@ our knowledge and should be the preferred approach.
   \frametitle{NONMEM control stream: priors for SIGMAs}
 
 \begin{itemize}
-  \item Inverse Wishart distribution
+  \item<1-> Inverse Wishart distribution
   \begin{itemize}
     \item Mode \verb|$SIGMAP|
     \item Degrees of freedom \verb|$SIGMAPD|
   \end{itemize}
-  \item Additional options for \verb|METHOD=NUTS|:
+  \item<2-> Additional options for \verb|METHOD=NUTS|:
         \begin{itemize}
           \item Lognormal or half-t-distribution for SDs (\verb|$EST SVARF|)
           \item Lewandowski-Kurowicka-Joe (LKJ) distribution for correlation matrix (\verb|$EST SLKJDF|)
@@ -2434,16 +2420,16 @@ of $\Omega_{\text{prior},ii}$
   \frametitle{Estimation options: initial estimates}
 
 \begin{itemize}
-  \item Multiple (e.g., 4) chains using \verb|METHOD=CHAIN|.
+  \item<1-> Multiple (e.g., 4) chains using \verb|METHOD=CHAIN|.
         \begin{itemize}
-          \item Generate 4 sets of initial estimates with \verb|METHOD=CHAIN NSAMPLE=4 FILE=1000.chn|
-          \item Use \verb|CTYPE| option to sample initial THETAs from
+          \item<2-> Generate 4 sets of initial estimates with \verb|METHOD=CHAIN NSAMPLE=4 FILE=1000.chn|
+          \item<3-> Use \verb|CTYPE| option to sample initial THETAs from
                 \begin{itemize}
                   \item uniform (\% above and below \verb|$THETA|), or
                   \item bounds in \verb|$THETA| (not recommended!), or
                   \item normal distribution defined by \verb|$THETAP| and \verb|$THETAPV|
                 \end{itemize}
-          \item OMEGA and SIGMA initial estimates from inverse Wishart distributions
+          \item<4-> OMEGA and SIGMA initial estimates from inverse Wishart distributions
                 \begin{itemize}
                   \item Degrees of freedom from \verb|DF| and \verb|DFS|
                 \end{itemize}
@@ -2456,9 +2442,9 @@ of $\Omega_{\text{prior},ii}$
   \frametitle{Bayesian diagnostics in NONMEM}
 
 \begin{itemize}
-  \item Diagnostics should consider full posterior (across all chains)
-  \item NONMEM generates summaries (means, standard errors, shrinkages, etc.) \textcolor{mrggreen}{\bf within each chain}
-  \item Further post-processing is required to summarize and diagnose models \textcolor{mrggreen}{\bf across all chains}
+  \item<1-> Diagnostics should consider full posterior (across all chains)
+  \item<2-> NONMEM generates summaries (means, standard errors, shrinkages, etc.) \textcolor{mrggreen}{\bf within each chain}
+  \item<3-> Further post-processing is required to summarize and diagnose models \textcolor{mrggreen}{\bf across all chains}
 \end{itemize}
 
 \end{frame}
@@ -2467,11 +2453,11 @@ of $\Omega_{\text{prior},ii}$
   \frametitle{NONMEM output needs some tweaking}
 
 \begin{itemize}
-  \item NONMEM will output means of parameter estimates
+  \item<1-> NONMEM will output means of parameter estimates
         \begin{itemize}
           \item Probably OK for THETAs, can introduce bias for variance terms
         \end{itemize}
-  \item \$TABLE outputs
+  \item<2-> \$TABLE outputs
         \begin{itemize}
           \item ETA values not derived across posterior distribution, but post hoc estimates using mean of THETAs/OMEGAs
                 \begin{itemize}
@@ -2486,22 +2472,22 @@ of $\Omega_{\text{prior},ii}$
   \frametitle{Better to derive estimates/diagnostics using the full posterior: PREDs and IPREDs}
 
 \begin{itemize}
-  \item Simulate S replicates:
+  \item<1-> Simulate S replicates:
         \begin{itemize}
-          \item $y_{ijs}^{\text{sim,PRED}}$
+          \item<2-> $y_{ijs}^{\text{sim,PRED}}$
                 \begin{itemize}
                   \item include all variability, sample from posterior at each replicate
                 \end{itemize}
-          \item $y_{ijs}^{\text{sim,IPRED}}$
+          \item<3-> $y_{ijs}^{\text{sim,IPRED}}$
                 \begin{itemize}
                   \item include within-subject variability, posterior samples of population parameters and ETAs
                 \end{itemize}
         \end{itemize}
         \begin{itemize}
-          \item Calculate:
+          \item<4-> Calculate:
                 \begin{itemize}
                   \item $\text{PRED}_{ij} = \frac{1}{S} \sum_{s=1}^{S} y_{ijs}^{\text{sim,PRED}}$
-                  \item $\text{IPRED}_{ij} = \frac{1}{S} \sum_{s=1}^{S} y_{ijs}^{\text{sim,IPRED}}$
+                  \item<5-> $\text{IPRED}_{ij} = \frac{1}{S} \sum_{s=1}^{S} y_{ijs}^{\text{sim,IPRED}}$
                 \end{itemize}
         \end{itemize}
 \end{itemize}
@@ -2572,67 +2558,87 @@ of $\Omega_{\text{prior},ii}$
 
 \end{frame}
 
+\section[Getting posterior samples for individual parameters]{Getting
+  your hands on posterior samples for individual parameters and
+  predictions}
+
+\begin{frame}[fragile]
+  \frametitle{Getting your hands on posterior samples for individual
+    parameters and predictions}
+
+  \begin{itemize}
+  \item<1-> With \verb|METHOD = BAYES| or \verb|NUTS NONMEM| writes MCMC sampled
+    parameter values to a file named in the \verb|$ESTIMATION| statement
+    (Defaults to $<$model name$>$.ext).
+  \item<2-> Only population parameters are written.
+  \item<3-> Before NONMEM 7.5: Use \verb|FORTRAN WRITE| statements (verbatim code) to write
+    individual parameter or prediction values to files.
+  \item<4-> NONMEM 7.5: Use \verb|$EST ... BAYES_PHI_STORE=1| to generate $<$model name$>$.iph
+  \end{itemize}
+  
+\end{frame}
+
 \section[Selecting Bayesian estimation methods]{Practical strategies for selecting Bayesian estimation methods for specific types of problems}
 
-\begin{frame}
-  \frametitle{Practical strategies for selecting Bayesian estimation
-    methods for specific types of problems}
+% \begin{frame}
+%   \frametitle{Practical strategies for selecting Bayesian estimation
+%     methods for specific types of problems}
   
-  \begin{itemize}
-  \item When to go Bayes (and why)?
-  \item Which method?
-  \item Which tool?
-  \end{itemize}
+%   \begin{itemize}
+%   \item When to go Bayes (and why)?
+%   \item Which method?
+%   \item Which tool?
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}
   \frametitle{When to go Bayes (and why)?}
   
   \begin{itemize}
-  \item Bayesian data analysis and inference are always applicable to
-    PMX modeling applications. 
+    \item<1-> Bayesian data analysis and inference are always applicable to
+      PMX modeling applications. 
     \begin{itemize}
-    \item I think most scientists tend to
-    interpret probability in Bayesian terms, so it makes sense to use
-    methods consistent with that. 
-\item However, BDA is usually more
-    computationally demanding and time consuming.
+      \item<2-> I think most scientists tend to
+      interpret probability in Bayesian terms, so it makes sense to use
+      methods consistent with that. 
+      \item<3-> However, BDA is usually more
+          computationally demanding and time consuming.
     \end{itemize}
-  \item Pragmatism leads us to go Bayesian when it pays off the most.
-  \item E.g., when you want your inferences to be informed by both prior
-    information and new data.
-  \item IMHO we should be using informative prior distributions more
-    extensively, particularly during the “learn” stages of drug
-    development.
+    \item<4-> Pragmatism leads us to go Bayesian when it pays off the most.
+    \item<5-> E.g., when you want your inferences to be informed by both prior
+      information and new data.
+    \item<6-> IMHO we should be using informative prior distributions more
+      extensively, particularly during the “learn” stages of drug
+      development.
   \end{itemize}
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{Which method?}
+% \begin{frame}
+%   \frametitle{Which method?}
   
-  \begin{itemize}
-  \item MCMC when it is practical.
-  \item MAP Bayes for large scale models (e.g., QSP) that require more
-    computation time than is practical for MCMC.
-  \item MAP Bayes for more rapid exploration of multiple models
-    followed by MCMC for the final model (or small set of contenders).
-  \item Generally prefer NUTS over MH/Gibbs (BAYES)
-  \end{itemize}
+%   \begin{itemize}
+%   \item MCMC when it is practical.
+%   \item MAP Bayes for large scale models (e.g., QSP) that require more
+%     computation time than is practical for MCMC.
+%   \item MAP Bayes for more rapid exploration of multiple models
+%     followed by MCMC for the final model (or small set of contenders).
+%   \item Generally prefer NUTS over MH/Gibbs (BAYES)
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}
-  \frametitle{Which method?}
+% \begin{frame}
+%   \frametitle{Which method?}
   
-  \begin{itemize}
-  \item MH (Metropolis-Hastings) is ``meh''
-  \item Gibbs is ``good''
-  \item HMC (NUTS) is ``how maestros compute''
-  \end{itemize}
+%   \begin{itemize}
+%   \item MH (Metropolis-Hastings) is ``meh''
+%   \item Gibbs is ``good''
+%   \item HMC (NUTS) is ``how maestros compute''
+%   \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 % \section{Preview of Bayesian data analysis using Stan and Torsten}
 
