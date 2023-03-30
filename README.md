@@ -3,8 +3,8 @@
 Materials for a lecture on NONMEM Bayes at IU in March 2023.
 
 Lecture:
-- Slides
-- Handout
+- [Slides](slides/iu-2023-nonmem-bayes.pdf)
+- [Handout](slides/iu-2023-nonmem-bayes-handout.pdf)
 
 Example model:
 
